@@ -1,0 +1,1290 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-translate="page.title">TechInnovate - Nuestros Proyectos</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* Language Selector */
+        .language-selector {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1001;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 50px;
+            padding: 0.5rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .lang-btn {
+            background: transparent;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            color: #64748b;
+        }
+
+        .lang-btn.active {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .lang-btn:hover:not(.active) {
+            background: rgba(99, 102, 241, 0.1);
+            color: #6366f1;
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+        }
+
+        .nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #6366f1;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #6366f1;
+        }
+
+        .back-btn {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .back-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(99, 102, 241, 0.3);
+        }
+
+        /* Hero Section with Carousel */
+        .hero {
+            min-height: 80vh;
+            position: relative;
+            overflow: hidden;
+            margin-top: 80px;
+            display: flex;
+            align-items: center;
+        }
+
+        .carousel-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .carousel-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .carousel-slide.active {
+            opacity: 1;
+        }
+
+        .carousel-slide::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.8) 0%, rgba(118, 75, 162, 0.8) 100%);
+            z-index: 1;
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+            position: relative;
+            z-index: 3;
+            width: 100%;
+        }
+
+        .hero-text h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-text p {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.95);
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            text-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Carousel Controls */
+        .carousel-controls {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 1rem;
+            z-index: 4;
+        }
+
+        .carousel-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 2px solid rgba(255, 255, 255, 0.8);
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .carousel-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            border-color: white;
+            transform: scale(1.1);
+        }
+
+        /* Carousel Indicators */
+        .carousel-indicators {
+            position: absolute;
+            bottom: 6rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 0.5rem;
+            z-index: 4;
+        }
+
+        .indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .indicator.active {
+            background: white;
+            transform: scale(1.2);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Projects Section */
+        .projects {
+            padding: 6rem 0;
+            background: #f8fafc;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 1rem;
+        }
+
+        .section-title p {
+            font-size: 1.1rem;
+            color: #64748b;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-image i {
+            font-size: 4rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .project-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+        }
+
+        .project-content {
+            padding: 2rem;
+        }
+
+        .project-category {
+            display: inline-block;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .project-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 1rem;
+        }
+
+        .project-description {
+            color: #64748b;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .tech-tag {
+            background: #f1f5f9;
+            color: #475569;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .project-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .project-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #6366f1;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .project-link:hover {
+            color: #4f46e5;
+        }
+
+        /* Stats Section */
+        .stats {
+            padding: 6rem 0;
+            background: white;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .stat-card {
+            padding: 2rem;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #6366f1;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            color: #64748b;
+            font-weight: 500;
+        }
+
+        /* Footer */
+        .footer {
+            background: #1e293b;
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: #94a3b8;
+            text-decoration: none;
+            line-height: 1.6;
+        }
+
+        .footer-section a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #334155;
+            padding-top: 1rem;
+            text-align: center;
+            color: #94a3b8;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #333;
+            cursor: pointer;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .language-selector {
+                top: 10px;
+                right: 10px;
+                padding: 0.3rem;
+            }
+
+            .lang-btn {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.9rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-toggle {
+                display: block;
+            }
+
+            .hero {
+                min-height: 70vh;
+            }
+
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-text p {
+                font-size: 1.1rem;
+            }
+
+            .carousel-controls {
+                bottom: 1rem;
+                gap: 0.5rem;
+            }
+
+            .carousel-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+
+            .carousel-indicators {
+                bottom: 4rem;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-text h1 {
+                font-size: 2rem;
+            }
+
+            .hero-text p {
+                font-size: 1rem;
+            }
+
+            .carousel-controls {
+                gap: 0.3rem;
+            }
+
+            .carousel-btn {
+                width: 35px;
+                height: 35px;
+                font-size: 0.9rem;
+            }
+
+            .indicator {
+                width: 10px;
+                height: 10px;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        /* Scroll animations */
+        .scroll-animate {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .scroll-animate.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Loading animation */
+        .loading {
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .loaded {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="loading">
+    <!-- Language Selector -->
+    <div class="language-selector">
+        <button class="lang-btn active" data-lang="es">
+            <i class="fas fa-globe"></i> ES
+        </button>
+        <button class="lang-btn" data-lang="en">
+            <i class="fas fa-globe"></i> EN
+        </button>
+        <button class="lang-btn" data-lang="fr">
+            <i class="fas fa-globe"></i> FR
+        </button>
+        <button class="lang-btn" data-lang="de">
+            <i class="fas fa-globe"></i> DE
+        </button>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav">
+            <a href="index.html" class="logo">TechInnovate</a>
+            <ul class="nav-links">
+                <li><a href="index.html#inicio" data-translate="nav.home">Inicio</a></li>
+                <li><a href="index.html#servicios" data-translate="nav.services">Servicios</a></li>
+                <li><a href="index.html#testimonios" data-translate="nav.testimonials">Testimonios</a></li>
+                <li><a href="index.html#contacto" data-translate="nav.contact">Contacto</a></li>
+            </ul>
+            <a href="index.html" class="back-btn">
+                <i class="fas fa-arrow-left"></i>
+                <span data-translate="nav.back">Volver</span>
+            </a>
+            <button class="mobile-menu-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Hero Section with Carousel -->
+    <section class="hero">
+        <div class="carousel-container">
+            <div class="carousel-slide active" style="background-image: url('https://images.unsplash.com/photo-1518709268805-4e9042af2176?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2025&q=80')"></div>
+            <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2072&q=80')"></div>
+            <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80')"></div>
+        </div>
+        
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1 data-translate="hero.title">Nuestros Proyectos</h1>
+                <p data-translate="hero.subtitle">Descubre los proyectos innovadores que hemos desarrollado para nuestros clientes, desde aplicaciones web hasta soluciones empresariales complejas.</p>
+            </div>
+        </div>
+
+        <!-- Carousel Indicators -->
+        <div class="carousel-indicators">
+            <div class="indicator active" data-slide="0"></div>
+            <div class="indicator" data-slide="1"></div>
+            <div class="indicator" data-slide="2"></div>
+        </div>
+
+        <!-- Carousel Controls -->
+        <div class="carousel-controls">
+            <button class="carousel-btn" id="prevBtn">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="carousel-btn" id="nextBtn">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="projects">
+        <div class="container">
+            <div class="section-title">
+                <h2 data-translate="projects.title">Proyectos Destacados</h2>
+                <p data-translate="projects.subtitle">Cada proyecto representa nuestra dedicación a la excelencia tecnológica y la satisfacción del cliente.</p>
+            </div>
+            <div class="projects-grid">
+                <div class="project-card scroll-animate">
+                    <div class="project-image">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-category" data-translate="projects.ecommerce.category">E-commerce</div>
+                        <h3 class="project-title" data-translate="projects.ecommerce.title">Tienda Online Premium</h3>
+                        <p class="project-description" data-translate="projects.ecommerce.desc">Plataforma de comercio electrónico completa con sistema de pagos integrado, gestión de inventario y panel administrativo avanzado.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">React</span>
+                            <span class="tech-tag">Node.js</span>
+                            <span class="tech-tag">MongoDB</span>
+                            <span class="tech-tag">Stripe</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link">
+                                <i class="fas fa-external-link-alt"></i>
+                                <span data-translate="projects.view">Ver Proyecto</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card scroll-animate">
+                    <div class="project-image">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-category" data-translate="projects.mobile.category">App Móvil</div>
+                        <h3 class="project-title" data-translate="projects.mobile.title">App de Gestión Empresarial</h3>
+                        <p class="project-description" data-translate="projects.mobile.desc">Aplicación móvil para gestión de equipos de trabajo con seguimiento de proyectos, comunicación interna y reportes en tiempo real.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">React Native</span>
+                            <span class="tech-tag">Firebase</span>
+                            <span class="tech-tag">Redux</span>
+                            <span class="tech-tag">Push Notifications</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link">
+                                <i class="fas fa-external-link-alt"></i>
+                                <span data-translate="projects.view">Ver Proyecto</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card scroll-animate">
+                    <div class="project-image">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-category" data-translate="projects.dashboard.category">Dashboard</div>
+                        <h3 class="project-title" data-translate="projects.dashboard.title">Panel de Analytics</h3>
+                        <p class="project-description" data-translate="projects.dashboard.desc">Dashboard interactivo para visualización de datos empresariales con gráficos en tiempo real y reportes personalizables.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Vue.js</span>
+                            <span class="tech-tag">D3.js</span>
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">PostgreSQL</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link">
+                                <i class="fas fa-external-link-alt"></i>
+                                <span data-translate="projects.view">Ver Proyecto</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card scroll-animate">
+                    <div class="project-image">
+                        <i class="fas fa-cloud"></i>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-category" data-translate="projects.cloud.category">Cloud</div>
+                        <h3 class="project-title" data-translate="projects.cloud.title">Sistema de Gestión en la Nube</h3>
+                        <p class="project-description" data-translate="projects.cloud.desc">Solución completa en la nube para gestión documental con almacenamiento seguro, colaboración en tiempo real y acceso desde cualquier dispositivo.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">AWS</span>
+                            <span class="tech-tag">Angular</span>
+                            <span class="tech-tag">Express.js</span>
+                            <span class="tech-tag">Docker</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link">
+                                <i class="fas fa-external-link-alt"></i>
+                                <span data-translate="projects.view">Ver Proyecto</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card scroll-animate">
+                    <div class="project-image">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-category" data-translate="projects.security.category">Ciberseguridad</div>
+                        <h3 class="project-title" data-translate="projects.security.title">Sistema de Monitoreo de Seguridad</h3>
+                        <p class="project-description" data-translate="projects.security.desc">Plataforma de monitoreo de seguridad con detección de amenazas en tiempo real, análisis de vulnerabilidades y respuesta automatizada.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">Elasticsearch</span>
+                            <span class="tech-tag">Kibana</span>
+                            <span class="tech-tag">Machine Learning</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link">
+                                <i class="fas fa-external-link-alt"></i>
+                                <span data-translate="projects.view">Ver Proyecto</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card scroll-animate">
+                    <div class="project-image">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-category" data-translate="projects.education.category">Educación</div>
+                        <h3 class="project-title" data-translate="projects.education.title">Plataforma de E-Learning</h3>
+                        <p class="project-description" data-translate="projects.education.desc">Sistema completo de aprendizaje online con cursos interactivos, evaluaciones automáticas y seguimiento del progreso estudiantil.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Laravel</span>
+                            <span class="tech-tag">MySQL</span>
+                            <span class="tech-tag">WebRTC</span>
+                            <span class="tech-tag">Redis</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link">
+                                <i class="fas fa-external-link-alt"></i>
+                                <span data-translate="projects.view">Ver Proyecto</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-card scroll-animate">
+                    <div class="stat-number">150+</div>
+                    <div class="stat-label" data-translate="stats.projects">Proyectos Completados</div>
+                </div>
+                <div class="stat-card scroll-animate">
+                    <div class="stat-number">98%</div>
+                    <div class="stat-label" data-translate="stats.satisfaction">Satisfacción del Cliente</div>
+                </div>
+                <div class="stat-card scroll-animate">
+                    <div class="stat-number">5</div>
+                    <div class="stat-label" data-translate="stats.years">Años de Experiencia</div>
+                </div>
+                <div class="stat-card scroll-animate">
+                    <div class="stat-number">50+</div>
+                    <div class="stat-label" data-translate="stats.clients">Clientes Satisfechos</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>TechInnovate</h3>
+                    <p data-translate="footer.company.desc">Transformamos ideas en realidad digital con soluciones tecnológicas innovadoras y de alta calidad.</p>
+                </div>
+                <div class="footer-section">
+                    <h3 data-translate="footer.services.title">Servicios</h3>
+                    <p><a href="index.html#servicios" data-translate="footer.services.web">Desarrollo Web</a></p>
+                    <p><a href="index.html#servicios" data-translate="footer.services.mobile">Aplicaciones Móviles</a></p>
+                    <p><a href="index.html#servicios" data-translate="footer.services.enterprise">Software Empresarial</a></p>
+                    <p><a href="index.html#servicios" data-translate="footer.services.cybersecurity">Ciberseguridad</a></p>
+                </div>
+                <div class="footer-section">
+                    <h3 data-translate="footer.company.title">Empresa</h3>
+                    <p><a href="index.html" data-translate="footer.company.about">Sobre Nosotros</a></p>
+                    <p><a href="#" data-translate="footer.company.team">Equipo</a></p>
+                    <p><a href="#" data-translate="footer.company.careers">Carreras</a></p>
+                    <p><a href="#" data-translate="footer.company.blog">Blog</a></p>
+                </div>
+                <div class="footer-section">
+                    <h3 data-translate="footer.contact.title">Contacto</h3>
+                    <p>+1 (555) 123-4567</p>
+                    <p>info@techinnovate.com</p>
+                    <p data-translate="footer.contact.address">123 Tech Street, Silicon Valley</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p data-translate="footer.copyright">&copy; 2024 TechInnovate. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Translations object
+        const translations = {
+            es: {
+                'page.title': 'TechInnovate - Nuestros Proyectos',
+                'nav.home': 'Inicio',
+                'nav.services': 'Servicios',
+                'nav.testimonials': 'Testimonios',
+                'nav.contact': 'Contacto',
+                'nav.back': 'Volver',
+                'hero.title': 'Nuestros Proyectos',
+                'hero.subtitle': 'Descubre los proyectos innovadores que hemos desarrollado para nuestros clientes, desde aplicaciones web hasta soluciones empresariales complejas.',
+                'projects.title': 'Proyectos Destacados',
+                'projects.subtitle': 'Cada proyecto representa nuestra dedicación a la excelencia tecnológica y la satisfacción del cliente.',
+                'projects.view': 'Ver Proyecto',
+                'projects.ecommerce.category': 'E-commerce',
+                'projects.ecommerce.title': 'Tienda Online Premium',
+                'projects.ecommerce.desc': 'Plataforma de comercio electrónico completa con sistema de pagos integrado, gestión de inventario y panel administrativo avanzado.',
+                'projects.mobile.category': 'App Móvil',
+                'projects.mobile.title': 'App de Gestión Empresarial',
+                'projects.mobile.desc': 'Aplicación móvil para gestión de equipos de trabajo con seguimiento de proyectos, comunicación interna y reportes en tiempo real.',
+                'projects.dashboard.category': 'Dashboard',
+                'projects.dashboard.title': 'Panel de Analytics',
+                'projects.dashboard.desc': 'Dashboard interactivo para visualización de datos empresariales con gráficos en tiempo real y reportes personalizables.',
+                'projects.cloud.category': 'Cloud',
+                'projects.cloud.title': 'Sistema de Gestión en la Nube',
+                'projects.cloud.desc': 'Solución completa en la nube para gestión documental con almacenamiento seguro, colaboración en tiempo real y acceso desde cualquier dispositivo.',
+                'projects.security.category': 'Ciberseguridad',
+                'projects.security.title': 'Sistema de Monitoreo de Seguridad',
+                'projects.security.desc': 'Plataforma de monitoreo de seguridad con detección de amenazas en tiempo real, análisis de vulnerabilidades y respuesta automatizada.',
+                'projects.education.category': 'Educación',
+                'projects.education.title': 'Plataforma de E-Learning',
+                'projects.education.desc': 'Sistema completo de aprendizaje online con cursos interactivos, evaluaciones automáticas y seguimiento del progreso estudiantil.',
+                'stats.projects': 'Proyectos Completados',
+                'stats.satisfaction': 'Satisfacción del Cliente',
+                'stats.years': 'Años de Experiencia',
+                'stats.clients': 'Clientes Satisfechos',
+                'footer.company.desc': 'Transformamos ideas en realidad digital con soluciones tecnológicas innovadoras y de alta calidad.',
+                'footer.services.title': 'Servicios',
+                'footer.services.web': 'Desarrollo Web',
+                'footer.services.mobile': 'Aplicaciones Móviles',
+                'footer.services.enterprise': 'Software Empresarial',
+                'footer.services.cybersecurity': 'Ciberseguridad',
+                'footer.company.title': 'Empresa',
+                'footer.company.about': 'Sobre Nosotros',
+                'footer.company.team': 'Equipo',
+                'footer.company.careers': 'Carreras',
+                'footer.company.blog': 'Blog',
+                'footer.contact.title': 'Contacto',
+                'footer.contact.address': '123 Tech Street, Silicon Valley',
+                'footer.copyright': '© 2024 TechInnovate. Todos los derechos reservados.'
+            },
+            en: {
+                'page.title': 'TechInnovate - Our Projects',
+                'nav.home': 'Home',
+                'nav.services': 'Services',
+                'nav.testimonials': 'Testimonials',
+                'nav.contact': 'Contact',
+                'nav.back': 'Back',
+                'hero.title': 'Our Projects',
+                'hero.subtitle': 'Discover the innovative projects we have developed for our clients, from web applications to complex enterprise solutions.',
+                'projects.title': 'Featured Projects',
+                'projects.subtitle': 'Each project represents our dedication to technological excellence and customer satisfaction.',
+                'projects.view': 'View Project',
+                'projects.ecommerce.category': 'E-commerce',
+                'projects.ecommerce.title': 'Premium Online Store',
+                'projects.ecommerce.desc': 'Complete e-commerce platform with integrated payment system, inventory management and advanced admin panel.',
+                'projects.mobile.category': 'Mobile App',
+                'projects.mobile.title': 'Business Management App',
+                'projects.mobile.desc': 'Mobile application for team management with project tracking, internal communication and real-time reporting.',
+                'projects.dashboard.category': 'Dashboard',
+                'projects.dashboard.title': 'Analytics Panel',
+                'projects.dashboard.desc': 'Interactive dashboard for business data visualization with real-time charts and customizable reports.',
+                'projects.cloud.category': 'Cloud',
+                'projects.cloud.title': 'Cloud Management System',
+                'projects.cloud.desc': 'Complete cloud solution for document management with secure storage, real-time collaboration and access from any device.',
+                'projects.security.category': 'Cybersecurity',
+                'projects.security.title': 'Security Monitoring System',
+                'projects.security.desc': 'Security monitoring platform with real-time threat detection, vulnerability analysis and automated response.',
+                'projects.education.category': 'Education',
+                'projects.education.title': 'E-Learning Platform',
+                'projects.education.desc': 'Complete online learning system with interactive courses, automatic assessments and student progress tracking.',
+                'stats.projects': 'Completed Projects',
+                'stats.satisfaction': 'Customer Satisfaction',
+                'stats.years': 'Years of Experience',
+                'stats.clients': 'Satisfied Clients',
+                'footer.company.desc': 'We transform ideas into digital reality with innovative and high-quality technology solutions.',
+                'footer.services.title': 'Services',
+                'footer.services.web': 'Web Development',
+                'footer.services.mobile': 'Mobile Applications',
+                'footer.services.enterprise': 'Enterprise Software',
+                'footer.services.cybersecurity': 'Cybersecurity',
+                'footer.company.title': 'Company',
+                'footer.company.about': 'About Us',
+                'footer.company.team': 'Team',
+                'footer.company.careers': 'Careers',
+                'footer.company.blog': 'Blog',
+                'footer.contact.title': 'Contact',
+                'footer.contact.address': '123 Tech Street, Silicon Valley',
+                'footer.copyright': '© 2024 TechInnovate. All rights reserved.'
+            },
+            fr: {
+                'page.title': 'TechInnovate - Nos Projets',
+                'nav.home': 'Accueil',
+                'nav.services': 'Services',
+                'nav.testimonials': 'Témoignages',
+                'nav.contact': 'Contact',
+                'nav.back': 'Retour',
+                'hero.title': 'Nos Projets',
+                'hero.subtitle': 'Découvrez les projets innovants que nous avons développés pour nos clients, des applications web aux solutions d\'entreprise complexes.',
+                'projects.title': 'Projets en Vedette',
+                'projects.subtitle': 'Chaque projet représente notre dévouement à l\'excellence technologique et à la satisfaction client.',
+                'projects.view': 'Voir le Projet',
+                'projects.ecommerce.category': 'E-commerce',
+                'projects.ecommerce.title': 'Boutique en Ligne Premium',
+                'projects.ecommerce.desc': 'Plateforme e-commerce complète avec système de paiement intégré, gestion d\'inventaire et panneau d\'administration avancé.',
+                'projects.mobile.category': 'App Mobile',
+                'projects.mobile.title': 'App de Gestion d\'Entreprise',
+                'projects.mobile.desc': 'Application mobile pour la gestion d\'équipes avec suivi de projets, communication interne et rapports en temps réel.',
+                'projects.dashboard.category': 'Tableau de Bord',
+                'projects.dashboard.title': 'Panneau d\'Analytics',
+                'projects.dashboard.desc': 'Tableau de bord interactif pour la visualisation de données d\'entreprise avec graphiques en temps réel et rapports personnalisables.',
+                'projects.cloud.category': 'Cloud',
+                'projects.cloud.title': 'Système de Gestion Cloud',
+                'projects.cloud.desc': 'Solution cloud complète pour la gestion documentaire avec stockage sécurisé, collaboration en temps réel et accès depuis n\'importe quel appareil.',
+                'projects.security.category': 'Cybersécurité',
+                'projects.security.title': 'Système de Surveillance Sécuritaire',
+                'projects.security.desc': 'Plateforme de surveillance sécuritaire avec détection de menaces en temps réel, analyse de vulnérabilités et réponse automatisée.',
+                'projects.education.category': 'Éducation',
+                'projects.education.title': 'Plateforme E-Learning',
+                'projects.education.desc': 'Système d\'apprentissage en ligne complet avec cours interactifs, évaluations automatiques et suivi des progrès étudiants.',
+                'stats.projects': 'Projets Terminés',
+                'stats.satisfaction': 'Satisfaction Client',
+                'stats.years': 'Années d\'Expérience',
+                'stats.clients': 'Clients Satisfaits',
+                'footer.company.desc': 'Nous transformons les idées en réalité numérique avec des solutions technologiques innovantes et de haute qualité.',
+                'footer.services.title': 'Services',
+                'footer.services.web': 'Développement Web',
+                'footer.services.mobile': 'Applications Mobiles',
+                'footer.services.enterprise': 'Logiciel d\'Entreprise',
+                'footer.services.cybersecurity': 'Cybersécurité',
+                'footer.company.title': 'Entreprise',
+                'footer.company.about': 'À Propos',
+                'footer.company.team': 'Équipe',
+                'footer.company.careers': 'Carrières',
+                'footer.company.blog': 'Blog',
+                'footer.contact.title': 'Contact',
+                'footer.contact.address': '123 Tech Street, Silicon Valley',
+                'footer.copyright': '© 2024 TechInnovate. Tous droits réservés.'
+            },
+            de: {
+                'page.title': 'TechInnovate - Unsere Projekte',
+                'nav.home': 'Startseite',
+                'nav.services': 'Dienstleistungen',
+                'nav.testimonials': 'Referenzen',
+                'nav.contact': 'Kontakt',
+                'nav.back': 'Zurück',
+                'hero.title': 'Unsere Projekte',
+                'hero.subtitle': 'Entdecken Sie die innovativen Projekte, die wir für unsere Kunden entwickelt haben, von Webanwendungen bis hin zu komplexen Unternehmenslösungen.',
+                'projects.title': 'Ausgewählte Projekte',
+                'projects.subtitle': 'Jedes Projekt repräsentiert unser Engagement für technologische Exzellenz und Kundenzufriedenheit.',
+                'projects.view': 'Projekt Ansehen',
+                'projects.ecommerce.category': 'E-Commerce',
+                'projects.ecommerce.title': 'Premium Online-Shop',
+                'projects.ecommerce.desc': 'Vollständige E-Commerce-Plattform mit integriertem Zahlungssystem, Lagerverwaltung und erweiterten Admin-Panel.',
+                'projects.mobile.category': 'Mobile App',
+                'projects.mobile.title': 'Business Management App',
+                'projects.mobile.desc': 'Mobile Anwendung für Teamverwaltung mit Projektverfolgung, interner Kommunikation und Echtzeit-Berichterstattung.',
+                'projects.dashboard.category': 'Dashboard',
+                'projects.dashboard.title': 'Analytics Panel',
+                'projects.dashboard.desc': 'Interaktives Dashboard für Geschäftsdatenvisualisierung mit Echtzeit-Diagrammen und anpassbaren Berichten.',
+                'projects.cloud.category': 'Cloud',
+                'projects.cloud.title': 'Cloud-Management-System',
+                'projects.cloud.desc': 'Vollständige Cloud-Lösung für Dokumentenverwaltung mit sicherem Speicher, Echtzeit-Zusammenarbeit und Zugriff von jedem Gerät.',
+                'projects.security.category': 'Cybersicherheit',
+                'projects.security.title': 'Sicherheitsüberwachungssystem',
+                'projects.security.desc': 'Sicherheitsüberwachungsplattform mit Echtzeit-Bedrohungserkennung, Schwachstellenanalyse und automatisierter Reaktion.',
+                'projects.education.category': 'Bildung',
+                'projects.education.title': 'E-Learning-Plattform',
+                'projects.education.desc': 'Vollständiges Online-Lernsystem mit interaktiven Kursen, automatischen Bewertungen und Verfolgung des Studentenfortschritts.',
+                'stats.projects': 'Abgeschlossene Projekte',
+                'stats.satisfaction': 'Kundenzufriedenheit',
+                'stats.years': 'Jahre Erfahrung',
+                'stats.clients': 'Zufriedene Kunden',
+                'footer.company.desc': 'Wir verwandeln Ideen in digitale Realität mit innovativen und hochwertigen Technologielösungen.',
+                'footer.services.title': 'Dienstleistungen',
+                'footer.services.web': 'Web-Entwicklung',
+                'footer.services.mobile': 'Mobile Anwendungen',
+                'footer.services.enterprise': 'Unternehmenssoftware',
+                'footer.services.cybersecurity': 'Cybersicherheit',
+                'footer.company.title': 'Unternehmen',
+                'footer.company.about': 'Über Uns',
+                'footer.company.team': 'Team',
+                'footer.company.careers': 'Karriere',
+                'footer.company.blog': 'Blog',
+                'footer.contact.title': 'Kontakt',
+                'footer.contact.address': '123 Tech Street, Silicon Valley',
+                'footer.copyright': '© 2024 TechInnovate. Alle Rechte vorbehalten.'
+            }
+        };
+
+        // Current language
+        let currentLang = localStorage.getItem('preferred-language') || 'es';
+
+        // Translation function
+        function translate(key, lang = currentLang) {
+            return translations[lang] && translations[lang][key] ? translations[lang][key] : key;
+        }
+
+        // Update page content
+        function updateContent() {
+            document.querySelectorAll('[data-translate]').forEach(element => {
+                const key = element.getAttribute('data-translate');
+                const translation = translate(key);
+                
+                if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+                    if (element.placeholder !== undefined) {
+                        element.placeholder = translation;
+                    }
+                } else {
+                    element.textContent = translation;
+                }
+            });
+
+            // Update document title
+            document.title = translate('page.title');
+            
+            // Update HTML lang attribute
+            document.documentElement.lang = currentLang;
+        }
+
+        // Language selector functionality
+        function initLanguageSelector() {
+            const langButtons = document.querySelectorAll('.lang-btn');
+            
+            // Set initial active button
+            langButtons.forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.lang === currentLang);
+            });
+
+            langButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const newLang = button.dataset.lang;
+                    
+                    if (newLang !== currentLang) {
+                        currentLang = newLang;
+                        localStorage.setItem('preferred-language', currentLang);
+                        
+                        // Update active button
+                        langButtons.forEach(btn => {
+                            btn.classList.toggle('active', btn.dataset.lang === currentLang);
+                        });
+                        
+                        // Update content
+                        updateContent();
+                    }
+                });
+            });
+        }
+
+        // Header background change on scroll
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(255, 255, 255, 0.98)';
+                header.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
+            } else {
+                header.style.background = 'rgba(255, 255, 255, 0.95)';
+                header.style.boxShadow = 'none';
+            }
+        });
+
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all scroll-animate elements
+        document.querySelectorAll('.scroll-animate').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Mobile menu toggle
+        document.querySelector('.mobile-menu-toggle').addEventListener('click', function() {
+            const navLinks = document.querySelector('.nav-links');
+            const isVisible = navLinks.style.display === 'flex';
+            navLinks.style.display = isVisible ? 'none' : 'flex';
+            
+            if (!isVisible) {
+                navLinks.style.position = 'absolute';
+                navLinks.style.top = '100%';
+                navLinks.style.left = '0';
+                navLinks.style.right = '0';
+                navLinks.style.background = 'white';
+                navLinks.style.flexDirection = 'column';
+                navLinks.style.padding = '1rem';
+                navLinks.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.1)';
+            }
+        });
+
+        // Carousel functionality
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.carousel-slide');
+        const indicators = document.querySelectorAll('.indicator');
+        const totalSlides = slides.length;
+
+        function showSlide(index) {
+            // Remove active class from all slides and indicators
+            slides.forEach(slide => slide.classList.remove('active'));
+            indicators.forEach(indicator => indicator.classList.remove('active'));
+
+            // Add active class to current slide and indicator
+            slides[index].classList.add('active');
+            indicators[index].classList.add('active');
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            showSlide(currentSlide);
+        }
+
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            showSlide(currentSlide);
+        }
+
+        function goToSlide(index) {
+            currentSlide = index;
+            showSlide(currentSlide);
+        }
+
+        // Auto-play carousel
+        let autoPlayInterval = setInterval(nextSlide, 5000);
+
+        // Pause auto-play on hover
+        const heroSection = document.querySelector('.hero');
+        heroSection.addEventListener('mouseenter', () => {
+            clearInterval(autoPlayInterval);
+        });
+
+        heroSection.addEventListener('mouseleave', () => {
+            autoPlayInterval = setInterval(nextSlide, 5000);
+        });
+
+        // Initialize everything when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            initLanguageSelector();
+            updateContent();
+
+            // Carousel event listeners
+            document.getElementById('nextBtn').addEventListener('click', nextSlide);
+            document.getElementById('prevBtn').addEventListener('click', prevSlide);
+
+            // Indicator click events
+            indicators.forEach((indicator, index) => {
+                indicator.addEventListener('click', () => goToSlide(index));
+            });
+
+            // Keyboard navigation
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowLeft') {
+                    prevSlide();
+                } else if (e.key === 'ArrowRight') {
+                    nextSlide();
+                }
+            });
+
+            // Touch/swipe support for mobile
+            let startX = 0;
+            let endX = 0;
+
+            heroSection.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].clientX;
+            });
+
+            heroSection.addEventListener('touchend', (e) => {
+                endX = e.changedTouches[0].clientX;
+                handleSwipe();
+            });
+
+            function handleSwipe() {
+                const swipeThreshold = 50;
+                const diff = startX - endX;
+
+                if (Math.abs(diff) > swipeThreshold) {
+                    if (diff > 0) {
+                        nextSlide(); // Swipe left - next slide
+                    } else {
+                        prevSlide(); // Swipe right - previous slide
+                    }
+                }
+            }
+            
+            // Show page after loading
+            setTimeout(() => {
+                document.body.classList.add('loaded');
+            }, 300);
+        });
+
+        // Add loading animation
+        window.addEventListener('load', function() {
+            document.body.classList.add('loaded');
+        });
+    </script>
+</body>
+</html>
