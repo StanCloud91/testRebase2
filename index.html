@@ -181,6 +181,8 @@
             font-size: 1.1rem;
             cursor: pointer;
             transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
         }
 
         .btn-secondary {
@@ -253,12 +255,6 @@
             75% { transform: translateY(-15px) rotate(270deg); }
         }
 
-        /* Features Section */
-        .features {
-            padding: 6rem 0;
-            background: #f8fafc;
-        }
-
         .container {
             max-width: 1200px;
             margin: 0 auto;
@@ -282,51 +278,6 @@
             color: #64748b;
             max-width: 600px;
             margin: 0 auto;
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .feature-card {
-            background: white;
-            padding: 2.5rem;
-            border-radius: 20px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            text-align: center;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-        }
-
-        .feature-icon {
-            width: 80px;
-            height: 80px;
-            background: linear-gradient(135deg, #6366f1, #8b5cf6);
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 1.5rem;
-            font-size: 2rem;
-            color: white;
-        }
-
-        .feature-card h3 {
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: #1e293b;
-            margin-bottom: 1rem;
-        }
-
-        .feature-card p {
-            color: #64748b;
-            line-height: 1.6;
         }
 
         /* Services Section */
@@ -590,7 +541,6 @@
                 grid-template-columns: 1fr;
             }
 
-            .features-grid,
             .services-grid,
             .testimonials-grid {
                 grid-template-columns: 1fr;
@@ -660,7 +610,6 @@
             <ul class="nav-links">
                 <li><a href="#inicio" data-translate="nav.home">Inicio</a></li>
                 <li><a href="#servicios" data-translate="nav.services">Servicios</a></li>
-                <li><a href="#caracteristicas" data-translate="nav.features">Características</a></li>
                 <li><a href="#testimonios" data-translate="nav.testimonials">Testimonios</a></li>
                 <li><a href="#contacto" data-translate="nav.contact">Contacto</a></li>
             </ul>
@@ -678,7 +627,7 @@
                 <h1 data-translate="hero.title">Transformamos Ideas en Realidad Digital</h1>
                 <p data-translate="hero.subtitle">Somos líderes en soluciones tecnológicas innovadoras que impulsan el crecimiento de tu negocio. Desarrollamos software personalizado, aplicaciones móviles y sistemas web de última generación.</p>
                 <div class="hero-buttons">
-                    <button class="btn-primary" data-translate="hero.btn1">Ver Proyectos</button>
+                    <a href="proyectos.html" class="btn-primary" data-translate="hero.btn1">Ver Proyectos</a>
                     <button class="btn-secondary" data-translate="hero.btn2">Solicitar Demo</button>
                 </div>
             </div>
@@ -696,59 +645,6 @@
         </div>
     </section>
 
-    <!-- Features Section -->
-    <section id="caracteristicas" class="features">
-        <div class="container">
-            <div class="section-title">
-                <h2 data-translate="features.title">¿Por qué elegirnos?</h2>
-                <p data-translate="features.subtitle">Ofrecemos soluciones tecnológicas de vanguardia con un enfoque centrado en el cliente y resultados excepcionales.</p>
-            </div>
-            <div class="features-grid">
-                <div class="feature-card scroll-animate">
-                    <div class="feature-icon">
-                        <i class="fas fa-rocket"></i>
-                    </div>
-                    <h3 data-translate="features.card1.title">Desarrollo Rápido</h3>
-                    <p data-translate="features.card1.desc">Utilizamos metodologías ágiles y tecnologías modernas para entregar proyectos en tiempo récord sin comprometer la calidad.</p>
-                </div>
-                <div class="feature-card scroll-animate">
-                    <div class="feature-icon">
-                        <i class="fas fa-shield-alt"></i>
-                    </div>
-                    <h3 data-translate="features.card2.title">Seguridad Avanzada</h3>
-                    <p data-translate="features.card2.desc">Implementamos las mejores prácticas de seguridad para proteger tu información y la de tus usuarios con encriptación de nivel empresarial.</p>
-                </div>
-                <div class="feature-card scroll-animate">
-                    <div class="feature-icon">
-                        <i class="fas fa-mobile-alt"></i>
-                    </div>
-                    <h3 data-translate="features.card3.title">Diseño Responsivo</h3>
-                    <p data-translate="features.card3.desc">Todas nuestras soluciones están optimizadas para funcionar perfectamente en cualquier dispositivo, desde móviles hasta escritorio.</p>
-                </div>
-                <div class="feature-card scroll-animate">
-                    <div class="feature-icon">
-                        <i class="fas fa-headset"></i>
-                    </div>
-                    <h3 data-translate="features.card4.title">Soporte 24/7</h3>
-                    <p data-translate="features.card4.desc">Nuestro equipo de soporte técnico está disponible las 24 horas para resolver cualquier incidencia y mantener tu sistema funcionando.</p>
-                </div>
-                <div class="feature-card scroll-animate">
-                    <div class="feature-icon">
-                        <i class="fas fa-chart-line"></i>
-                    </div>
-                    <h3 data-translate="features.card5.title">Escalabilidad</h3>
-                    <p data-translate="features.card5.desc">Arquitecturas diseñadas para crecer con tu negocio, manejando desde miles hasta millones de usuarios sin problemas.</p>
-                </div>
-                <div class="feature-card scroll-animate">
-                    <div class="feature-icon">
-                        <i class="fas fa-cogs"></i>
-                    </div>
-                    <h3 data-translate="features.card6.title">Personalización Total</h3>
-                    <p data-translate="features.card6.desc">Cada proyecto se adapta específicamente a las necesidades de tu empresa, garantizando una solución única y efectiva.</p>
-                </div>
-            </div>
-        </div>
-    </section>
 
     <!-- Services Section -->
     <section id="servicios" class="services">
@@ -977,7 +873,6 @@
                 'page.title': 'TechInnovate - Soluciones Tecnológicas Avanzadas',
                 'nav.home': 'Inicio',
                 'nav.services': 'Servicios',
-                'nav.features': 'Características',
                 'nav.testimonials': 'Testimonios',
                 'nav.contact': 'Contacto',
                 'nav.cta': 'Comenzar',
@@ -985,20 +880,6 @@
                 'hero.subtitle': 'Somos líderes en soluciones tecnológicas innovadoras que impulsan el crecimiento de tu negocio. Desarrollamos software personalizado, aplicaciones móviles y sistemas web de última generación.',
                 'hero.btn1': 'Ver Proyectos',
                 'hero.btn2': 'Solicitar Demo',
-                'features.title': '¿Por qué elegirnos?',
-                'features.subtitle': 'Ofrecemos soluciones tecnológicas de vanguardia con un enfoque centrado en el cliente y resultados excepcionales.',
-                'features.card1.title': 'Desarrollo Rápido',
-                'features.card1.desc': 'Utilizamos metodologías ágiles y tecnologías modernas para entregar proyectos en tiempo récord sin comprometer la calidad.',
-                'features.card2.title': 'Seguridad Avanzada',
-                'features.card2.desc': 'Implementamos las mejores prácticas de seguridad para proteger tu información y la de tus usuarios con encriptación de nivel empresarial.',
-                'features.card3.title': 'Diseño Responsivo',
-                'features.card3.desc': 'Todas nuestras soluciones están optimizadas para funcionar perfectamente en cualquier dispositivo, desde móviles hasta escritorio.',
-                'features.card4.title': 'Soporte 24/7',
-                'features.card4.desc': 'Nuestro equipo de soporte técnico está disponible las 24 horas para resolver cualquier incidencia y mantener tu sistema funcionando.',
-                'features.card5.title': 'Escalabilidad',
-                'features.card5.desc': 'Arquitecturas diseñadas para crecer con tu negocio, manejando desde miles hasta millones de usuarios sin problemas.',
-                'features.card6.title': 'Personalización Total',
-                'features.card6.desc': 'Cada proyecto se adapta específicamente a las necesidades de tu empresa, garantizando una solución única y efectiva.',
                 'services.title': 'Nuestros Servicios',
                 'services.subtitle': 'Ofrecemos una gama completa de servicios tecnológicos para impulsar tu negocio hacia el futuro digital.',
                 'services.web.title': 'Desarrollo Web',
@@ -1093,7 +974,6 @@
                 'page.title': 'TechInnovate - Advanced Technology Solutions',
                 'nav.home': 'Home',
                 'nav.services': 'Services',
-                'nav.features': 'Features',
                 'nav.testimonials': 'Testimonials',
                 'nav.contact': 'Contact',
                 'nav.cta': 'Get Started',
@@ -1101,20 +981,6 @@
                 'hero.subtitle': 'We are leaders in innovative technology solutions that drive your business growth. We develop custom software, mobile applications and next-generation web systems.',
                 'hero.btn1': 'View Projects',
                 'hero.btn2': 'Request Demo',
-                'features.title': 'Why Choose Us?',
-                'features.subtitle': 'We offer cutting-edge technology solutions with a client-centered approach and exceptional results.',
-                'features.card1.title': 'Rapid Development',
-                'features.card1.desc': 'We use agile methodologies and modern technologies to deliver projects in record time without compromising quality.',
-                'features.card2.title': 'Advanced Security',
-                'features.card2.desc': 'We implement security best practices to protect your information and your users\' data with enterprise-level encryption.',
-                'features.card3.title': 'Responsive Design',
-                'features.card3.desc': 'All our solutions are optimized to work perfectly on any device, from mobile to desktop.',
-                'features.card4.title': '24/7 Support',
-                'features.card4.desc': 'Our technical support team is available 24 hours a day to resolve any issues and keep your system running.',
-                'features.card5.title': 'Scalability',
-                'features.card5.desc': 'Architectures designed to grow with your business, handling from thousands to millions of users seamlessly.',
-                'features.card6.title': 'Total Customization',
-                'features.card6.desc': 'Each project is specifically adapted to your company\'s needs, ensuring a unique and effective solution.',
                 'services.title': 'Our Services',
                 'services.subtitle': 'We offer a complete range of technology services to drive your business towards the digital future.',
                 'services.web.title': 'Web Development',
@@ -1209,7 +1075,6 @@
                 'page.title': 'TechInnovate - Solutions Technologiques Avancées',
                 'nav.home': 'Accueil',
                 'nav.services': 'Services',
-                'nav.features': 'Caractéristiques',
                 'nav.testimonials': 'Témoignages',
                 'nav.contact': 'Contact',
                 'nav.cta': 'Commencer',
@@ -1217,20 +1082,6 @@
                 'hero.subtitle': 'Nous sommes leaders en solutions technologiques innovantes qui stimulent la croissance de votre entreprise. Nous développons des logiciels personnalisés, des applications mobiles et des systèmes web de nouvelle génération.',
                 'hero.btn1': 'Voir les Projets',
                 'hero.btn2': 'Demander une Démo',
-                'features.title': 'Pourquoi Nous Choisir?',
-                'features.subtitle': 'Nous offrons des solutions technologiques de pointe avec une approche centrée sur le client et des résultats exceptionnels.',
-                'features.card1.title': 'Développement Rapide',
-                'features.card1.desc': 'Nous utilisons des méthodologies agiles et des technologies modernes pour livrer des projets en temps record sans compromettre la qualité.',
-                'features.card2.title': 'Sécurité Avancée',
-                'features.card2.desc': 'Nous implémentons les meilleures pratiques de sécurité pour protéger vos informations et celles de vos utilisateurs avec un chiffrement de niveau entreprise.',
-                'features.card3.title': 'Design Responsive',
-                'features.card3.desc': 'Toutes nos solutions sont optimisées pour fonctionner parfaitement sur n\'importe quel appareil, du mobile au bureau.',
-                'features.card4.title': 'Support 24/7',
-                'features.card4.desc': 'Notre équipe de support technique est disponible 24 heures sur 24 pour résoudre tout problème et maintenir votre système en fonctionnement.',
-                'features.card5.title': 'Évolutivité',
-                'features.card5.desc': 'Architectures conçues pour grandir avec votre entreprise, gérant de milliers à des millions d\'utilisateurs sans problème.',
-                'features.card6.title': 'Personnalisation Totale',
-                'features.card6.desc': 'Chaque projet est spécifiquement adapté aux besoins de votre entreprise, garantissant une solution unique et efficace.',
                 'services.title': 'Nos Services',
                 'services.subtitle': 'Nous offrons une gamme complète de services technologiques pour propulser votre entreprise vers l\'avenir numérique.',
                 'services.web.title': 'Développement Web',
@@ -1325,7 +1176,6 @@
                 'page.title': 'TechInnovate - Fortgeschrittene Technologielösungen',
                 'nav.home': 'Startseite',
                 'nav.services': 'Dienstleistungen',
-                'nav.features': 'Funktionen',
                 'nav.testimonials': 'Referenzen',
                 'nav.contact': 'Kontakt',
                 'nav.cta': 'Loslegen',
@@ -1333,20 +1183,6 @@
                 'hero.subtitle': 'Wir sind führend bei innovativen Technologielösungen, die das Wachstum Ihres Unternehmens vorantreiben. Wir entwickeln maßgeschneiderte Software, mobile Anwendungen und Web-Systeme der nächsten Generation.',
                 'hero.btn1': 'Projekte Ansehen',
                 'hero.btn2': 'Demo Anfordern',
-                'features.title': 'Warum Uns Wählen?',
-                'features.subtitle': 'Wir bieten modernste Technologielösungen mit einem kundenorientierten Ansatz und außergewöhnlichen Ergebnissen.',
-                'features.card1.title': 'Schnelle Entwicklung',
-                'features.card1.desc': 'Wir verwenden agile Methoden und moderne Technologien, um Projekte in Rekordzeit zu liefern, ohne die Qualität zu beeinträchtigen.',
-                'features.card2.title': 'Erweiterte Sicherheit',
-                'features.card2.desc': 'Wir implementieren bewährte Sicherheitspraktiken, um Ihre Informationen und die Ihrer Benutzer mit Verschlüsselung auf Unternehmensebene zu schützen.',
-                'features.card3.title': 'Responsives Design',
-                'features.card3.desc': 'Alle unsere Lösungen sind optimiert, um auf jedem Gerät perfekt zu funktionieren, von Mobilgeräten bis zum Desktop.',
-                'features.card4.title': '24/7 Support',
-                'features.card4.desc': 'Unser technisches Support-Team ist rund um die Uhr verfügbar, um Probleme zu lösen und Ihr System am Laufen zu halten.',
-                'features.card5.title': 'Skalierbarkeit',
-                'features.card5.desc': 'Architekturen, die mit Ihrem Unternehmen wachsen und von Tausenden bis zu Millionen von Benutzern nahtlos bewältigen.',
-                'features.card6.title': 'Vollständige Anpassung',
-                'features.card6.desc': 'Jedes Projekt wird speziell an die Bedürfnisse Ihres Unternehmens angepasst und gewährleistet eine einzigartige und effektive Lösung.',
                 'services.title': 'Unsere Dienstleistungen',
                 'services.subtitle': 'Wir bieten eine vollständige Palette von Technologiedienstleistungen, um Ihr Unternehmen in die digitale Zukunft zu führen.',
                 'services.web.title': 'Web-Entwicklung',
