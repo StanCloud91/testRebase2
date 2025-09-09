@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TechInnovate - Soluciones Tecnológicas Avanzadas</title>
+    <title data-translate="page.title">TechInnovate - Soluciones Tecnológicas Avanzadas</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -18,6 +18,43 @@
             line-height: 1.6;
             color: #333;
             overflow-x: hidden;
+        }
+
+        /* Language Selector */
+        .language-selector {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1001;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 50px;
+            padding: 0.5rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .lang-btn {
+            background: transparent;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            color: #64748b;
+        }
+
+        .lang-btn.active {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .lang-btn:hover:not(.active) {
+            background: rgba(99, 102, 241, 0.1);
+            color: #6366f1;
         }
 
         /* Header */
@@ -169,11 +206,51 @@
             align-items: center;
         }
 
-        .hero-image img {
-            max-width: 100%;
-            height: auto;
+        .tech-animation {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.2), rgba(255,255,255,0.1));
             border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tech-icon {
+            font-size: 4rem;
+            color: rgba(255,255,255,0.8);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .floating-elements {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .floating-element {
+            position: absolute;
+            color: rgba(255, 255, 255, 0.3);
+            animation: floatAround 8s linear infinite;
+        }
+
+        .floating-element:nth-child(1) { top: 20%; left: 20%; animation-delay: 0s; }
+        .floating-element:nth-child(2) { top: 60%; right: 20%; animation-delay: 2s; }
+        .floating-element:nth-child(3) { bottom: 20%; left: 30%; animation-delay: 4s; }
+        .floating-element:nth-child(4) { top: 40%; right: 40%; animation-delay: 6s; }
+
+        @keyframes floatAround {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            25% { transform: translateY(-15px) rotate(90deg); }
+            50% { transform: translateY(-30px) rotate(180deg); }
+            75% { transform: translateY(-15px) rotate(270deg); }
         }
 
         /* Features Section */
@@ -477,6 +554,17 @@
 
         /* Responsive Design */
         @media (max-width: 768px) {
+            .language-selector {
+                top: 10px;
+                right: 10px;
+                padding: 0.3rem;
+            }
+
+            .lang-btn {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.9rem;
+            }
+
             .nav-links {
                 display: none;
             }
@@ -536,21 +624,47 @@
             opacity: 1;
             transform: translateY(0);
         }
+
+        /* Loading animation */
+        .loading {
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .loaded {
+            opacity: 1;
+        }
     </style>
 </head>
-<body>
+<body class="loading">
+    <!-- Language Selector -->
+    <div class="language-selector">
+        <button class="lang-btn active" data-lang="es">
+            <i class="fas fa-globe"></i> ES
+        </button>
+        <button class="lang-btn" data-lang="en">
+            <i class="fas fa-globe"></i> EN
+        </button>
+        <button class="lang-btn" data-lang="fr">
+            <i class="fas fa-globe"></i> FR
+        </button>
+        <button class="lang-btn" data-lang="de">
+            <i class="fas fa-globe"></i> DE
+        </button>
+    </div>
+
     <!-- Header -->
     <header class="header">
         <nav class="nav">
             <a href="#" class="logo">TechInnovate</a>
             <ul class="nav-links">
-                <li><a href="#inicio">Inicio</a></li>
-                <li><a href="#servicios">Servicios</a></li>
-                <li><a href="#caracteristicas">Características</a></li>
-                <li><a href="#testimonios">Testimonios</a></li>
-                <li><a href="#contacto">Contacto</a></li>
+                <li><a href="#inicio" data-translate="nav.home">Inicio</a></li>
+                <li><a href="#servicios" data-translate="nav.services">Servicios</a></li>
+                <li><a href="#caracteristicas" data-translate="nav.features">Características</a></li>
+                <li><a href="#testimonios" data-translate="nav.testimonials">Testimonios</a></li>
+                <li><a href="#contacto" data-translate="nav.contact">Contacto</a></li>
             </ul>
-            <button class="cta-button">Comenzar</button>
+            <button class="cta-button" data-translate="nav.cta">Comenzar</button>
             <button class="mobile-menu-toggle">
                 <i class="fas fa-bars"></i>
             </button>
@@ -561,16 +675,22 @@
     <section id="inicio" class="hero">
         <div class="hero-content">
             <div class="hero-text">
-                <h1>Transformamos Ideas en Realidad Digital</h1>
-                <p>Somos líderes en soluciones tecnológicas innovadoras que impulsan el crecimiento de tu negocio. Desarrollamos software personalizado, aplicaciones móviles y sistemas web de última generación.</p>
+                <h1 data-translate="hero.title">Transformamos Ideas en Realidad Digital</h1>
+                <p data-translate="hero.subtitle">Somos líderes en soluciones tecnológicas innovadoras que impulsan el crecimiento de tu negocio. Desarrollamos software personalizado, aplicaciones móviles y sistemas web de última generación.</p>
                 <div class="hero-buttons">
-                    <button class="btn-primary">Ver Proyectos</button>
-                    <button class="btn-secondary">Solicitar Demo</button>
+                    <button class="btn-primary" data-translate="hero.btn1">Ver Proyectos</button>
+                    <button class="btn-secondary" data-translate="hero.btn2">Solicitar Demo</button>
                 </div>
             </div>
             <div class="hero-image">
-                <div style="width: 100%; height: 400px; background: linear-gradient(135deg, rgba(255,255,255,0.2), rgba(255,255,255,0.1)); border-radius: 20px; display: flex; align-items: center; justify-content: center; font-size: 4rem; color: rgba(255,255,255,0.8);">
-                    <i class="fas fa-laptop-code"></i>
+                <div class="tech-animation">
+                    <div class="floating-elements">
+                        <div class="floating-element"><i class="fas fa-code"></i></div>
+                        <div class="floating-element"><i class="fas fa-mobile-alt"></i></div>
+                        <div class="floating-element"><i class="fas fa-cloud"></i></div>
+                        <div class="floating-element"><i class="fas fa-database"></i></div>
+                    </div>
+                    <i class="tech-icon fas fa-laptop-code"></i>
                 </div>
             </div>
         </div>
@@ -580,51 +700,51 @@
     <section id="caracteristicas" class="features">
         <div class="container">
             <div class="section-title">
-                <h2>¿Por qué elegirnos?</h2>
-                <p>Ofrecemos soluciones tecnológicas de vanguardia con un enfoque centrado en el cliente y resultados excepcionales.</p>
+                <h2 data-translate="features.title">¿Por qué elegirnos?</h2>
+                <p data-translate="features.subtitle">Ofrecemos soluciones tecnológicas de vanguardia con un enfoque centrado en el cliente y resultados excepcionales.</p>
             </div>
             <div class="features-grid">
                 <div class="feature-card scroll-animate">
                     <div class="feature-icon">
                         <i class="fas fa-rocket"></i>
                     </div>
-                    <h3>Desarrollo Rápido</h3>
-                    <p>Utilizamos metodologías ágiles y tecnologías modernas para entregar proyectos en tiempo récord sin comprometer la calidad.</p>
+                    <h3 data-translate="features.card1.title">Desarrollo Rápido</h3>
+                    <p data-translate="features.card1.desc">Utilizamos metodologías ágiles y tecnologías modernas para entregar proyectos en tiempo récord sin comprometer la calidad.</p>
                 </div>
                 <div class="feature-card scroll-animate">
                     <div class="feature-icon">
                         <i class="fas fa-shield-alt"></i>
                     </div>
-                    <h3>Seguridad Avanzada</h3>
-                    <p>Implementamos las mejores prácticas de seguridad para proteger tu información y la de tus usuarios con encriptación de nivel empresarial.</p>
+                    <h3 data-translate="features.card2.title">Seguridad Avanzada</h3>
+                    <p data-translate="features.card2.desc">Implementamos las mejores prácticas de seguridad para proteger tu información y la de tus usuarios con encriptación de nivel empresarial.</p>
                 </div>
                 <div class="feature-card scroll-animate">
                     <div class="feature-icon">
                         <i class="fas fa-mobile-alt"></i>
                     </div>
-                    <h3>Diseño Responsivo</h3>
-                    <p>Todas nuestras soluciones están optimizadas para funcionar perfectamente en cualquier dispositivo, desde móviles hasta escritorio.</p>
+                    <h3 data-translate="features.card3.title">Diseño Responsivo</h3>
+                    <p data-translate="features.card3.desc">Todas nuestras soluciones están optimizadas para funcionar perfectamente en cualquier dispositivo, desde móviles hasta escritorio.</p>
                 </div>
                 <div class="feature-card scroll-animate">
                     <div class="feature-icon">
                         <i class="fas fa-headset"></i>
                     </div>
-                    <h3>Soporte 24/7</h3>
-                    <p>Nuestro equipo de soporte técnico está disponible las 24 horas para resolver cualquier incidencia y mantener tu sistema funcionando.</p>
+                    <h3 data-translate="features.card4.title">Soporte 24/7</h3>
+                    <p data-translate="features.card4.desc">Nuestro equipo de soporte técnico está disponible las 24 horas para resolver cualquier incidencia y mantener tu sistema funcionando.</p>
                 </div>
                 <div class="feature-card scroll-animate">
                     <div class="feature-icon">
                         <i class="fas fa-chart-line"></i>
                     </div>
-                    <h3>Escalabilidad</h3>
-                    <p>Arquitecturas diseñadas para crecer con tu negocio, manejando desde miles hasta millones de usuarios sin problemas.</p>
+                    <h3 data-translate="features.card5.title">Escalabilidad</h3>
+                    <p data-translate="features.card5.desc">Arquitecturas diseñadas para crecer con tu negocio, manejando desde miles hasta millones de usuarios sin problemas.</p>
                 </div>
                 <div class="feature-card scroll-animate">
                     <div class="feature-icon">
                         <i class="fas fa-cogs"></i>
                     </div>
-                    <h3>Personalización Total</h3>
-                    <p>Cada proyecto se adapta específicamente a las necesidades de tu empresa, garantizando una solución única y efectiva.</p>
+                    <h3 data-translate="features.card6.title">Personalización Total</h3>
+                    <p data-translate="features.card6.desc">Cada proyecto se adapta específicamente a las necesidades de tu empresa, garantizando una solución única y efectiva.</p>
                 </div>
             </div>
         </div>
@@ -634,41 +754,41 @@
     <section id="servicios" class="services">
         <div class="container">
             <div class="section-title">
-                <h2>Nuestros Servicios</h2>
-                <p>Ofrecemos una gama completa de servicios tecnológicos para impulsar tu negocio hacia el futuro digital.</p>
+                <h2 data-translate="services.title">Nuestros Servicios</h2>
+                <p data-translate="services.subtitle">Ofrecemos una gama completa de servicios tecnológicos para impulsar tu negocio hacia el futuro digital.</p>
             </div>
             <div class="services-grid">
                 <div class="service-card scroll-animate">
-                    <h3>Desarrollo Web</h3>
-                    <p>Creamos sitios web modernos, rápidos y optimizados para SEO que convierten visitantes en clientes.</p>
-                    <div class="service-price">Desde $2,500</div>
+                    <h3 data-translate="services.web.title">Desarrollo Web</h3>
+                    <p data-translate="services.web.desc">Creamos sitios web modernos, rápidos y optimizados para SEO que convierten visitantes en clientes.</p>
+                    <div class="service-price" data-translate="services.web.price">Desde $2,500</div>
                     <ul style="list-style: none; padding: 0;">
-                        <li>✓ Diseño responsivo</li>
-                        <li>✓ Optimización SEO</li>
-                        <li>✓ Integración de pagos</li>
-                        <li>✓ Panel de administración</li>
+                        <li data-translate="services.web.feature1">✓ Diseño responsivo</li>
+                        <li data-translate="services.web.feature2">✓ Optimización SEO</li>
+                        <li data-translate="services.web.feature3">✓ Integración de pagos</li>
+                        <li data-translate="services.web.feature4">✓ Panel de administración</li>
                     </ul>
                 </div>
                 <div class="service-card scroll-animate">
-                    <h3>Aplicaciones Móviles</h3>
-                    <p>Desarrollamos apps nativas e híbridas para iOS y Android que ofrecen una experiencia de usuario excepcional.</p>
-                    <div class="service-price">Desde $5,000</div>
+                    <h3 data-translate="services.mobile.title">Aplicaciones Móviles</h3>
+                    <p data-translate="services.mobile.desc">Desarrollamos apps nativas e híbridas para iOS y Android que ofrecen una experiencia de usuario excepcional.</p>
+                    <div class="service-price" data-translate="services.mobile.price">Desde $5,000</div>
                     <ul style="list-style: none; padding: 0;">
-                        <li>✓ Diseño UX/UI</li>
-                        <li>✓ Desarrollo nativo</li>
-                        <li>✓ Integración de APIs</li>
-                        <li>✓ Publicación en stores</li>
+                        <li data-translate="services.mobile.feature1">✓ Diseño UX/UI</li>
+                        <li data-translate="services.mobile.feature2">✓ Desarrollo nativo</li>
+                        <li data-translate="services.mobile.feature3">✓ Integración de APIs</li>
+                        <li data-translate="services.mobile.feature4">✓ Publicación en stores</li>
                     </ul>
                 </div>
                 <div class="service-card scroll-animate">
-                    <h3>Software Empresarial</h3>
-                    <p>Soluciones personalizadas para automatizar procesos y mejorar la eficiencia operativa de tu empresa.</p>
-                    <div class="service-price">Desde $10,000</div>
+                    <h3 data-translate="services.enterprise.title">Software Empresarial</h3>
+                    <p data-translate="services.enterprise.desc">Soluciones personalizadas para automatizar procesos y mejorar la eficiencia operativa de tu empresa.</p>
+                    <div class="service-price" data-translate="services.enterprise.price">Desde $10,000</div>
                     <ul style="list-style: none; padding: 0;">
-                        <li>✓ Análisis de procesos</li>
-                        <li>✓ Desarrollo personalizado</li>
-                        <li>✓ Integración de sistemas</li>
-                        <li>✓ Capacitación del equipo</li>
+                        <li data-translate="services.enterprise.feature1">✓ Análisis de procesos</li>
+                        <li data-translate="services.enterprise.feature2">✓ Desarrollo personalizado</li>
+                        <li data-translate="services.enterprise.feature3">✓ Integración de sistemas</li>
+                        <li data-translate="services.enterprise.feature4">✓ Capacitación del equipo</li>
                     </ul>
                 </div>
             </div>
@@ -679,43 +799,43 @@
     <section id="testimonios" class="testimonials">
         <div class="container">
             <div class="section-title">
-                <h2>Lo que dicen nuestros clientes</h2>
-                <p>La satisfacción de nuestros clientes es nuestra mayor recompensa. Conoce sus experiencias.</p>
+                <h2 data-translate="testimonials.title">Lo que dicen nuestros clientes</h2>
+                <p data-translate="testimonials.subtitle">La satisfacción de nuestros clientes es nuestra mayor recompensa. Conoce sus experiencias.</p>
             </div>
             <div class="testimonials-grid">
                 <div class="testimonial-card scroll-animate">
-                    <div class="testimonial-text">
+                    <div class="testimonial-text" data-translate="testimonials.test1.text">
                         "TechInnovate transformó completamente nuestra presencia digital. El aumento en conversiones fue del 300% en solo 3 meses."
                     </div>
                     <div class="testimonial-author">
                         <div class="author-avatar">MR</div>
                         <div>
-                            <div style="font-weight: 600;">María Rodríguez</div>
-                            <div style="font-size: 0.9rem; opacity: 0.8;">CEO, Digital Solutions</div>
+                            <div style="font-weight: 600;" data-translate="testimonials.test1.name">María Rodríguez</div>
+                            <div style="font-size: 0.9rem; opacity: 0.8;" data-translate="testimonials.test1.role">CEO, Digital Solutions</div>
                         </div>
                     </div>
                 </div>
                 <div class="testimonial-card scroll-animate">
-                    <div class="testimonial-text">
+                    <div class="testimonial-text" data-translate="testimonials.test2.text">
                         "El equipo de desarrollo es excepcional. Entregaron nuestro proyecto antes de tiempo y superó todas nuestras expectativas."
                     </div>
                     <div class="testimonial-author">
                         <div class="author-avatar">JL</div>
                         <div>
-                            <div style="font-weight: 600;">Juan López</div>
-                            <div style="font-size: 0.9rem; opacity: 0.8;">CTO, InnovateCorp</div>
+                            <div style="font-weight: 600;" data-translate="testimonials.test2.name">Juan López</div>
+                            <div style="font-size: 0.9rem; opacity: 0.8;" data-translate="testimonials.test2.role">CTO, InnovateCorp</div>
                         </div>
                     </div>
                 </div>
                 <div class="testimonial-card scroll-animate">
-                    <div class="testimonial-text">
+                    <div class="testimonial-text" data-translate="testimonials.test3.text">
                         "La aplicación móvil que desarrollaron para nosotros ha sido un éxito total. Nuestros usuarios están encantados."
                     </div>
                     <div class="testimonial-author">
                         <div class="author-avatar">AG</div>
                         <div>
-                            <div style="font-weight: 600;">Ana García</div>
-                            <div style="font-size: 0.9rem; opacity: 0.8;">Directora, MobileFirst</div>
+                            <div style="font-weight: 600;" data-translate="testimonials.test3.name">Ana García</div>
+                            <div style="font-size: 0.9rem; opacity: 0.8;" data-translate="testimonials.test3.role">Directora, MobileFirst</div>
                         </div>
                     </div>
                 </div>
@@ -727,53 +847,53 @@
     <section id="contacto" class="contact">
         <div class="container">
             <div class="section-title">
-                <h2>¿Listo para comenzar tu proyecto?</h2>
-                <p>Contáctanos hoy mismo y descubre cómo podemos ayudarte a alcanzar tus objetivos tecnológicos.</p>
+                <h2 data-translate="contact.title">¿Listo para comenzar tu proyecto?</h2>
+                <p data-translate="contact.subtitle">Contáctanos hoy mismo y descubre cómo podemos ayudarte a alcanzar tus objetivos tecnológicos.</p>
             </div>
             <div class="contact-content">
                 <div class="contact-info">
-                    <h3>Información de Contacto</h3>
-                    <p>Estamos aquí para ayudarte. Ponte en contacto con nosotros a través de cualquiera de estos medios.</p>
+                    <h3 data-translate="contact.info.title">Información de Contacto</h3>
+                    <p data-translate="contact.info.desc">Estamos aquí para ayudarte. Ponte en contacto con nosotros a través de cualquiera de estos medios.</p>
                     <div class="contact-item">
                         <i class="fas fa-phone"></i>
                         <div>
-                            <div style="font-weight: 600;">Teléfono</div>
+                            <div style="font-weight: 600;" data-translate="contact.phone.label">Teléfono</div>
                             <div>+1 (555) 123-4567</div>
                         </div>
                     </div>
                     <div class="contact-item">
                         <i class="fas fa-envelope"></i>
                         <div>
-                            <div style="font-weight: 600;">Email</div>
+                            <div style="font-weight: 600;" data-translate="contact.email.label">Email</div>
                             <div>info@techinnovate.com</div>
                         </div>
                     </div>
                     <div class="contact-item">
                         <i class="fas fa-map-marker-alt"></i>
                         <div>
-                            <div style="font-weight: 600;">Dirección</div>
-                            <div>123 Tech Street, Silicon Valley, CA 94000</div>
+                            <div style="font-weight: 600;" data-translate="contact.address.label">Dirección</div>
+                            <div data-translate="contact.address.value">123 Tech Street, Silicon Valley, CA 94000</div>
                         </div>
                     </div>
                 </div>
                 <form class="contact-form">
                     <div class="form-group">
-                        <label for="name">Nombre completo</label>
+                        <label for="name" data-translate="contact.form.name">Nombre completo</label>
                         <input type="text" id="name" name="name" required>
                     </div>
                     <div class="form-group">
-                        <label for="email">Correo electrónico</label>
+                        <label for="email" data-translate="contact.form.email">Correo electrónico</label>
                         <input type="email" id="email" name="email" required>
                     </div>
                     <div class="form-group">
-                        <label for="company">Empresa</label>
+                        <label for="company" data-translate="contact.form.company">Empresa</label>
                         <input type="text" id="company" name="company">
                     </div>
                     <div class="form-group">
-                        <label for="message">Mensaje</label>
-                        <textarea id="message" name="message" placeholder="Cuéntanos sobre tu proyecto..." required></textarea>
+                        <label for="message" data-translate="contact.form.message">Mensaje</label>
+                        <textarea id="message" name="message" data-translate="contact.form.placeholder" placeholder="Cuéntanos sobre tu proyecto..." required></textarea>
                     </div>
-                    <button type="submit" class="btn-primary" style="width: 100%;">Enviar Mensaje</button>
+                    <button type="submit" class="btn-primary" style="width: 100%;" data-translate="contact.form.submit">Enviar Mensaje</button>
                 </form>
             </div>
         </div>
@@ -785,36 +905,467 @@
             <div class="footer-content">
                 <div class="footer-section">
                     <h3>TechInnovate</h3>
-                    <p>Transformamos ideas en realidad digital con soluciones tecnológicas innovadoras y de alta calidad.</p>
+                    <p data-translate="footer.company.desc">Transformamos ideas en realidad digital con soluciones tecnológicas innovadoras y de alta calidad.</p>
                 </div>
                 <div class="footer-section">
-                    <h3>Servicios</h3>
-                    <p><a href="#">Desarrollo Web</a></p>
-                    <p><a href="#">Aplicaciones Móviles</a></p>
-                    <p><a href="#">Software Empresarial</a></p>
-                    <p><a href="#">Consultoría IT</a></p>
+                    <h3 data-translate="footer.services.title">Servicios</h3>
+                    <p><a href="#" data-translate="footer.services.web">Desarrollo Web</a></p>
+                    <p><a href="#" data-translate="footer.services.mobile">Aplicaciones Móviles</a></p>
+                    <p><a href="#" data-translate="footer.services.enterprise">Software Empresarial</a></p>
+                    <p><a href="#" data-translate="footer.services.consulting">Consultoría IT</a></p>
                 </div>
                 <div class="footer-section">
-                    <h3>Empresa</h3>
-                    <p><a href="#">Sobre Nosotros</a></p>
-                    <p><a href="#">Equipo</a></p>
-                    <p><a href="#">Carreras</a></p>
-                    <p><a href="#">Blog</a></p>
+                    <h3 data-translate="footer.company.title">Empresa</h3>
+                    <p><a href="#" data-translate="footer.company.about">Sobre Nosotros</a></p>
+                    <p><a href="#" data-translate="footer.company.team">Equipo</a></p>
+                    <p><a href="#" data-translate="footer.company.careers">Carreras</a></p>
+                    <p><a href="#" data-translate="footer.company.blog">Blog</a></p>
                 </div>
                 <div class="footer-section">
-                    <h3>Contacto</h3>
+                    <h3 data-translate="footer.contact.title">Contacto</h3>
                     <p>+1 (555) 123-4567</p>
                     <p>info@techinnovate.com</p>
-                    <p>123 Tech Street, Silicon Valley</p>
+                    <p data-translate="footer.contact.address">123 Tech Street, Silicon Valley</p>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2024 TechInnovate. Todos los derechos reservados.</p>
+                <p data-translate="footer.copyright">&copy; 2024 TechInnovate. Todos los derechos reservados.</p>
             </div>
         </div>
     </footer>
 
     <script>
+        // Translations object
+        const translations = {
+            es: {
+                'page.title': 'TechInnovate - Soluciones Tecnológicas Avanzadas',
+                'nav.home': 'Inicio',
+                'nav.services': 'Servicios',
+                'nav.features': 'Características',
+                'nav.testimonials': 'Testimonios',
+                'nav.contact': 'Contacto',
+                'nav.cta': 'Comenzar',
+                'hero.title': 'Transformamos Ideas en Realidad Digital',
+                'hero.subtitle': 'Somos líderes en soluciones tecnológicas innovadoras que impulsan el crecimiento de tu negocio. Desarrollamos software personalizado, aplicaciones móviles y sistemas web de última generación.',
+                'hero.btn1': 'Ver Proyectos',
+                'hero.btn2': 'Solicitar Demo',
+                'features.title': '¿Por qué elegirnos?',
+                'features.subtitle': 'Ofrecemos soluciones tecnológicas de vanguardia con un enfoque centrado en el cliente y resultados excepcionales.',
+                'features.card1.title': 'Desarrollo Rápido',
+                'features.card1.desc': 'Utilizamos metodologías ágiles y tecnologías modernas para entregar proyectos en tiempo récord sin comprometer la calidad.',
+                'features.card2.title': 'Seguridad Avanzada',
+                'features.card2.desc': 'Implementamos las mejores prácticas de seguridad para proteger tu información y la de tus usuarios con encriptación de nivel empresarial.',
+                'features.card3.title': 'Diseño Responsivo',
+                'features.card3.desc': 'Todas nuestras soluciones están optimizadas para funcionar perfectamente en cualquier dispositivo, desde móviles hasta escritorio.',
+                'features.card4.title': 'Soporte 24/7',
+                'features.card4.desc': 'Nuestro equipo de soporte técnico está disponible las 24 horas para resolver cualquier incidencia y mantener tu sistema funcionando.',
+                'features.card5.title': 'Escalabilidad',
+                'features.card5.desc': 'Arquitecturas diseñadas para crecer con tu negocio, manejando desde miles hasta millones de usuarios sin problemas.',
+                'features.card6.title': 'Personalización Total',
+                'features.card6.desc': 'Cada proyecto se adapta específicamente a las necesidades de tu empresa, garantizando una solución única y efectiva.',
+                'services.title': 'Nuestros Servicios',
+                'services.subtitle': 'Ofrecemos una gama completa de servicios tecnológicos para impulsar tu negocio hacia el futuro digital.',
+                'services.web.title': 'Desarrollo Web',
+                'services.web.desc': 'Creamos sitios web modernos, rápidos y optimizados para SEO que convierten visitantes en clientes.',
+                'services.web.price': 'Desde $2,500',
+                'services.web.feature1': '✓ Diseño responsivo',
+                'services.web.feature2': '✓ Optimización SEO',
+                'services.web.feature3': '✓ Integración de pagos',
+                'services.web.feature4': '✓ Panel de administración',
+                'services.mobile.title': 'Aplicaciones Móviles',
+                'services.mobile.desc': 'Desarrollamos apps nativas e híbridas para iOS y Android que ofrecen una experiencia de usuario excepcional.',
+                'services.mobile.price': 'Desde $5,000',
+                'services.mobile.feature1': '✓ Diseño UX/UI',
+                'services.mobile.feature2': '✓ Desarrollo nativo',
+                'services.mobile.feature3': '✓ Integración de APIs',
+                'services.mobile.feature4': '✓ Publicación en stores',
+                'services.enterprise.title': 'Software Empresarial',
+                'services.enterprise.desc': 'Soluciones personalizadas para automatizar procesos y mejorar la eficiencia operativa de tu empresa.',
+                'services.enterprise.price': 'Desde $10,000',
+                'services.enterprise.feature1': '✓ Análisis de procesos',
+                'services.enterprise.feature2': '✓ Desarrollo personalizado',
+                'services.enterprise.feature3': '✓ Integración de sistemas',
+                'services.enterprise.feature4': '✓ Capacitación del equipo',
+                'testimonials.title': 'Lo que dicen nuestros clientes',
+                'testimonials.subtitle': 'La satisfacción de nuestros clientes es nuestra mayor recompensa. Conoce sus experiencias.',
+                'testimonials.test1.text': '"TechInnovate transformó completamente nuestra presencia digital. El aumento en conversiones fue del 300% en solo 3 meses."',
+                'testimonials.test1.name': 'María Rodríguez',
+                'testimonials.test1.role': 'CEO, Digital Solutions',
+                'testimonials.test2.text': '"El equipo de desarrollo es excepcional. Entregaron nuestro proyecto antes de tiempo y superó todas nuestras expectativas."',
+                'testimonials.test2.name': 'Juan López',
+                'testimonials.test2.role': 'CTO, InnovateCorp',
+                'testimonials.test3.text': '"La aplicación móvil que desarrollaron para nosotros ha sido un éxito total. Nuestros usuarios están encantados."',
+                'testimonials.test3.name': 'Ana García',
+                'testimonials.test3.role': 'Directora, MobileFirst',
+                'contact.title': '¿Listo para comenzar tu proyecto?',
+                'contact.subtitle': 'Contáctanos hoy mismo y descubre cómo podemos ayudarte a alcanzar tus objetivos tecnológicos.',
+                'contact.info.title': 'Información de Contacto',
+                'contact.info.desc': 'Estamos aquí para ayudarte. Ponte en contacto con nosotros a través de cualquiera de estos medios.',
+                'contact.phone.label': 'Teléfono',
+                'contact.email.label': 'Email',
+                'contact.address.label': 'Dirección',
+                'contact.address.value': '123 Tech Street, Silicon Valley, CA 94000',
+                'contact.form.name': 'Nombre completo',
+                'contact.form.email': 'Correo electrónico',
+                'contact.form.company': 'Empresa',
+                'contact.form.message': 'Mensaje',
+                'contact.form.placeholder': 'Cuéntanos sobre tu proyecto...',
+                'contact.form.submit': 'Enviar Mensaje',
+                'footer.company.desc': 'Transformamos ideas en realidad digital con soluciones tecnológicas innovadoras y de alta calidad.',
+                'footer.services.title': 'Servicios',
+                'footer.services.web': 'Desarrollo Web',
+                'footer.services.mobile': 'Aplicaciones Móviles',
+                'footer.services.enterprise': 'Software Empresarial',
+                'footer.services.consulting': 'Consultoría IT',
+                'footer.company.title': 'Empresa',
+                'footer.company.about': 'Sobre Nosotros',
+                'footer.company.team': 'Equipo',
+                'footer.company.careers': 'Carreras',
+                'footer.company.blog': 'Blog',
+                'footer.contact.title': 'Contacto',
+                'footer.contact.address': '123 Tech Street, Silicon Valley',
+                'footer.copyright': '© 2024 TechInnovate. Todos los derechos reservados.',
+                'form.success': '¡Mensaje enviado con éxito! Nos pondremos en contacto contigo pronto.',
+                'form.error': 'Por favor, completa todos los campos obligatorios.',
+                'form.sending': 'Enviando...'
+            },
+            en: {
+                'page.title': 'TechInnovate - Advanced Technology Solutions',
+                'nav.home': 'Home',
+                'nav.services': 'Services',
+                'nav.features': 'Features',
+                'nav.testimonials': 'Testimonials',
+                'nav.contact': 'Contact',
+                'nav.cta': 'Get Started',
+                'hero.title': 'We Transform Ideas into Digital Reality',
+                'hero.subtitle': 'We are leaders in innovative technology solutions that drive your business growth. We develop custom software, mobile applications and next-generation web systems.',
+                'hero.btn1': 'View Projects',
+                'hero.btn2': 'Request Demo',
+                'features.title': 'Why Choose Us?',
+                'features.subtitle': 'We offer cutting-edge technology solutions with a client-centered approach and exceptional results.',
+                'features.card1.title': 'Rapid Development',
+                'features.card1.desc': 'We use agile methodologies and modern technologies to deliver projects in record time without compromising quality.',
+                'features.card2.title': 'Advanced Security',
+                'features.card2.desc': 'We implement security best practices to protect your information and your users\' data with enterprise-level encryption.',
+                'features.card3.title': 'Responsive Design',
+                'features.card3.desc': 'All our solutions are optimized to work perfectly on any device, from mobile to desktop.',
+                'features.card4.title': '24/7 Support',
+                'features.card4.desc': 'Our technical support team is available 24 hours a day to resolve any issues and keep your system running.',
+                'features.card5.title': 'Scalability',
+                'features.card5.desc': 'Architectures designed to grow with your business, handling from thousands to millions of users seamlessly.',
+                'features.card6.title': 'Total Customization',
+                'features.card6.desc': 'Each project is specifically adapted to your company\'s needs, ensuring a unique and effective solution.',
+                'services.title': 'Our Services',
+                'services.subtitle': 'We offer a complete range of technology services to drive your business towards the digital future.',
+                'services.web.title': 'Web Development',
+                'services.web.desc': 'We create modern, fast and SEO-optimized websites that convert visitors into customers.',
+                'services.web.price': 'From $2,500',
+                'services.web.feature1': '✓ Responsive design',
+                'services.web.feature2': '✓ SEO optimization',
+                'services.web.feature3': '✓ Payment integration',
+                'services.web.feature4': '✓ Admin panel',
+                'services.mobile.title': 'Mobile Applications',
+                'services.mobile.desc': 'We develop native and hybrid apps for iOS and Android that offer an exceptional user experience.',
+                'services.mobile.price': 'From $5,000',
+                'services.mobile.feature1': '✓ UX/UI Design',
+                'services.mobile.feature2': '✓ Native development',
+                'services.mobile.feature3': '✓ API integration',
+                'services.mobile.feature4': '✓ Store publishing',
+                'services.enterprise.title': 'Enterprise Software',
+                'services.enterprise.desc': 'Custom solutions to automate processes and improve your company\'s operational efficiency.',
+                'services.enterprise.price': 'From $10,000',
+                'services.enterprise.feature1': '✓ Process analysis',
+                'services.enterprise.feature2': '✓ Custom development',
+                'services.enterprise.feature3': '✓ System integration',
+                'services.enterprise.feature4': '✓ Team training',
+                'testimonials.title': 'What Our Clients Say',
+                'testimonials.subtitle': 'Our clients\' satisfaction is our greatest reward. Learn about their experiences.',
+                'testimonials.test1.text': '"TechInnovate completely transformed our digital presence. The increase in conversions was 300% in just 3 months."',
+                'testimonials.test1.name': 'Maria Rodriguez',
+                'testimonials.test1.role': 'CEO, Digital Solutions',
+                'testimonials.test2.text': '"The development team is exceptional. They delivered our project ahead of time and exceeded all our expectations."',
+                'testimonials.test2.name': 'John Lopez',
+                'testimonials.test2.role': 'CTO, InnovateCorp',
+                'testimonials.test3.text': '"The mobile application they developed for us has been a total success. Our users are delighted."',
+                'testimonials.test3.name': 'Ana Garcia',
+                'testimonials.test3.role': 'Director, MobileFirst',
+                'contact.title': 'Ready to Start Your Project?',
+                'contact.subtitle': 'Contact us today and discover how we can help you achieve your technology goals.',
+                'contact.info.title': 'Contact Information',
+                'contact.info.desc': 'We are here to help you. Get in touch with us through any of these means.',
+                'contact.phone.label': 'Phone',
+                'contact.email.label': 'Email',
+                'contact.address.label': 'Address',
+                'contact.address.value': '123 Tech Street, Silicon Valley, CA 94000',
+                'contact.form.name': 'Full Name',
+                'contact.form.email': 'Email Address',
+                'contact.form.company': 'Company',
+                'contact.form.message': 'Message',
+                'contact.form.placeholder': 'Tell us about your project...',
+                'contact.form.submit': 'Send Message',
+                'footer.company.desc': 'We transform ideas into digital reality with innovative and high-quality technology solutions.',
+                'footer.services.title': 'Services',
+                'footer.services.web': 'Web Development',
+                'footer.services.mobile': 'Mobile Applications',
+                'footer.services.enterprise': 'Enterprise Software',
+                'footer.services.consulting': 'IT Consulting',
+                'footer.company.title': 'Company',
+                'footer.company.about': 'About Us',
+                'footer.company.team': 'Team',
+                'footer.company.careers': 'Careers',
+                'footer.company.blog': 'Blog',
+                'footer.contact.title': 'Contact',
+                'footer.contact.address': '123 Tech Street, Silicon Valley',
+                'footer.copyright': '© 2024 TechInnovate. All rights reserved.',
+                'form.success': 'Message sent successfully! We will contact you soon.',
+                'form.error': 'Please fill in all required fields.',
+                'form.sending': 'Sending...'
+            },
+            fr: {
+                'page.title': 'TechInnovate - Solutions Technologiques Avancées',
+                'nav.home': 'Accueil',
+                'nav.services': 'Services',
+                'nav.features': 'Caractéristiques',
+                'nav.testimonials': 'Témoignages',
+                'nav.contact': 'Contact',
+                'nav.cta': 'Commencer',
+                'hero.title': 'Nous Transformons les Idées en Réalité Numérique',
+                'hero.subtitle': 'Nous sommes leaders en solutions technologiques innovantes qui stimulent la croissance de votre entreprise. Nous développons des logiciels personnalisés, des applications mobiles et des systèmes web de nouvelle génération.',
+                'hero.btn1': 'Voir les Projets',
+                'hero.btn2': 'Demander une Démo',
+                'features.title': 'Pourquoi Nous Choisir?',
+                'features.subtitle': 'Nous offrons des solutions technologiques de pointe avec une approche centrée sur le client et des résultats exceptionnels.',
+                'features.card1.title': 'Développement Rapide',
+                'features.card1.desc': 'Nous utilisons des méthodologies agiles et des technologies modernes pour livrer des projets en temps record sans compromettre la qualité.',
+                'features.card2.title': 'Sécurité Avancée',
+                'features.card2.desc': 'Nous implémentons les meilleures pratiques de sécurité pour protéger vos informations et celles de vos utilisateurs avec un chiffrement de niveau entreprise.',
+                'features.card3.title': 'Design Responsive',
+                'features.card3.desc': 'Toutes nos solutions sont optimisées pour fonctionner parfaitement sur n\'importe quel appareil, du mobile au bureau.',
+                'features.card4.title': 'Support 24/7',
+                'features.card4.desc': 'Notre équipe de support technique est disponible 24 heures sur 24 pour résoudre tout problème et maintenir votre système en fonctionnement.',
+                'features.card5.title': 'Évolutivité',
+                'features.card5.desc': 'Architectures conçues pour grandir avec votre entreprise, gérant de milliers à des millions d\'utilisateurs sans problème.',
+                'features.card6.title': 'Personnalisation Totale',
+                'features.card6.desc': 'Chaque projet est spécifiquement adapté aux besoins de votre entreprise, garantissant une solution unique et efficace.',
+                'services.title': 'Nos Services',
+                'services.subtitle': 'Nous offrons une gamme complète de services technologiques pour propulser votre entreprise vers l\'avenir numérique.',
+                'services.web.title': 'Développement Web',
+                'services.web.desc': 'Nous créons des sites web modernes, rapides et optimisés pour le SEO qui convertissent les visiteurs en clients.',
+                'services.web.price': 'À partir de 2 500€',
+                'services.web.feature1': '✓ Design responsive',
+                'services.web.feature2': '✓ Optimisation SEO',
+                'services.web.feature3': '✓ Intégration de paiements',
+                'services.web.feature4': '✓ Panneau d\'administration',
+                'services.mobile.title': 'Applications Mobiles',
+                'services.mobile.desc': 'Nous développons des applications natives et hybrides pour iOS et Android qui offrent une expérience utilisateur exceptionnelle.',
+                'services.mobile.price': 'À partir de 5 000€',
+                'services.mobile.feature1': '✓ Design UX/UI',
+                'services.mobile.feature2': '✓ Développement natif',
+                'services.mobile.feature3': '✓ Intégration d\'APIs',
+                'services.mobile.feature4': '✓ Publication sur les stores',
+                'services.enterprise.title': 'Logiciel d\'Entreprise',
+                'services.enterprise.desc': 'Solutions personnalisées pour automatiser les processus et améliorer l\'efficacité opérationnelle de votre entreprise.',
+                'services.enterprise.price': 'À partir de 10 000€',
+                'services.enterprise.feature1': '✓ Analyse des processus',
+                'services.enterprise.feature2': '✓ Développement personnalisé',
+                'services.enterprise.feature3': '✓ Intégration de systèmes',
+                'services.enterprise.feature4': '✓ Formation de l\'équipe',
+                'testimonials.title': 'Ce que Disent Nos Clients',
+                'testimonials.subtitle': 'La satisfaction de nos clients est notre plus grande récompense. Découvrez leurs expériences.',
+                'testimonials.test1.text': '"TechInnovate a complètement transformé notre présence numérique. L\'augmentation des conversions a été de 300% en seulement 3 mois."',
+                'testimonials.test1.name': 'Marie Rodriguez',
+                'testimonials.test1.role': 'PDG, Digital Solutions',
+                'testimonials.test2.text': '"L\'équipe de développement est exceptionnelle. Ils ont livré notre projet en avance et ont dépassé toutes nos attentes."',
+                'testimonials.test2.name': 'Jean Lopez',
+                'testimonials.test2.role': 'CTO, InnovateCorp',
+                'testimonials.test3.text': '"L\'application mobile qu\'ils ont développée pour nous a été un succès total. Nos utilisateurs sont ravis."',
+                'testimonials.test3.name': 'Ana Garcia',
+                'testimonials.test3.role': 'Directrice, MobileFirst',
+                'contact.title': 'Prêt à Commencer Votre Projet?',
+                'contact.subtitle': 'Contactez-nous dès aujourd\'hui et découvrez comment nous pouvons vous aider à atteindre vos objectifs technologiques.',
+                'contact.info.title': 'Informations de Contact',
+                'contact.info.desc': 'Nous sommes là pour vous aider. Contactez-nous par l\'un de ces moyens.',
+                'contact.phone.label': 'Téléphone',
+                'contact.email.label': 'Email',
+                'contact.address.label': 'Adresse',
+                'contact.address.value': '123 Tech Street, Silicon Valley, CA 94000',
+                'contact.form.name': 'Nom Complet',
+                'contact.form.email': 'Adresse Email',
+                'contact.form.company': 'Entreprise',
+                'contact.form.message': 'Message',
+                'contact.form.placeholder': 'Parlez-nous de votre projet...',
+                'contact.form.submit': 'Envoyer le Message',
+                'footer.company.desc': 'Nous transformons les idées en réalité numérique avec des solutions technologiques innovantes et de haute qualité.',
+                'footer.services.title': 'Services',
+                'footer.services.web': 'Développement Web',
+                'footer.services.mobile': 'Applications Mobiles',
+                'footer.services.enterprise': 'Logiciel d\'Entreprise',
+                'footer.services.consulting': 'Conseil IT',
+                'footer.company.title': 'Entreprise',
+                'footer.company.about': 'À Propos',
+                'footer.company.team': 'Équipe',
+                'footer.company.careers': 'Carrières',
+                'footer.company.blog': 'Blog',
+                'footer.contact.title': 'Contact',
+                'footer.contact.address': '123 Tech Street, Silicon Valley',
+                'footer.copyright': '© 2024 TechInnovate. Tous droits réservés.',
+                'form.success': 'Message envoyé avec succès! Nous vous contacterons bientôt.',
+                'form.error': 'Veuillez remplir tous les champs obligatoires.',
+                'form.sending': 'Envoi en cours...'
+            },
+            de: {
+                'page.title': 'TechInnovate - Fortgeschrittene Technologielösungen',
+                'nav.home': 'Startseite',
+                'nav.services': 'Dienstleistungen',
+                'nav.features': 'Funktionen',
+                'nav.testimonials': 'Referenzen',
+                'nav.contact': 'Kontakt',
+                'nav.cta': 'Loslegen',
+                'hero.title': 'Wir Verwandeln Ideen in Digitale Realität',
+                'hero.subtitle': 'Wir sind führend bei innovativen Technologielösungen, die das Wachstum Ihres Unternehmens vorantreiben. Wir entwickeln maßgeschneiderte Software, mobile Anwendungen und Web-Systeme der nächsten Generation.',
+                'hero.btn1': 'Projekte Ansehen',
+                'hero.btn2': 'Demo Anfordern',
+                'features.title': 'Warum Uns Wählen?',
+                'features.subtitle': 'Wir bieten modernste Technologielösungen mit einem kundenorientierten Ansatz und außergewöhnlichen Ergebnissen.',
+                'features.card1.title': 'Schnelle Entwicklung',
+                'features.card1.desc': 'Wir verwenden agile Methoden und moderne Technologien, um Projekte in Rekordzeit zu liefern, ohne die Qualität zu beeinträchtigen.',
+                'features.card2.title': 'Erweiterte Sicherheit',
+                'features.card2.desc': 'Wir implementieren bewährte Sicherheitspraktiken, um Ihre Informationen und die Ihrer Benutzer mit Verschlüsselung auf Unternehmensebene zu schützen.',
+                'features.card3.title': 'Responsives Design',
+                'features.card3.desc': 'Alle unsere Lösungen sind optimiert, um auf jedem Gerät perfekt zu funktionieren, von Mobilgeräten bis zum Desktop.',
+                'features.card4.title': '24/7 Support',
+                'features.card4.desc': 'Unser technisches Support-Team ist rund um die Uhr verfügbar, um Probleme zu lösen und Ihr System am Laufen zu halten.',
+                'features.card5.title': 'Skalierbarkeit',
+                'features.card5.desc': 'Architekturen, die mit Ihrem Unternehmen wachsen und von Tausenden bis zu Millionen von Benutzern nahtlos bewältigen.',
+                'features.card6.title': 'Vollständige Anpassung',
+                'features.card6.desc': 'Jedes Projekt wird speziell an die Bedürfnisse Ihres Unternehmens angepasst und gewährleistet eine einzigartige und effektive Lösung.',
+                'services.title': 'Unsere Dienstleistungen',
+                'services.subtitle': 'Wir bieten eine vollständige Palette von Technologiedienstleistungen, um Ihr Unternehmen in die digitale Zukunft zu führen.',
+                'services.web.title': 'Web-Entwicklung',
+                'services.web.desc': 'Wir erstellen moderne, schnelle und SEO-optimierte Websites, die Besucher in Kunden verwandeln.',
+                'services.web.price': 'Ab 2.500€',
+                'services.web.feature1': '✓ Responsives Design',
+                'services.web.feature2': '✓ SEO-Optimierung',
+                'services.web.feature3': '✓ Zahlungsintegration',
+                'services.web.feature4': '✓ Admin-Panel',
+                'services.mobile.title': 'Mobile Anwendungen',
+                'services.mobile.desc': 'Wir entwickeln native und hybride Apps für iOS und Android, die eine außergewöhnliche Benutzererfahrung bieten.',
+                'services.mobile.price': 'Ab 5.000€',
+                'services.mobile.feature1': '✓ UX/UI Design',
+                'services.mobile.feature2': '✓ Native Entwicklung',
+                'services.mobile.feature3': '✓ API-Integration',
+                'services.mobile.feature4': '✓ Store-Veröffentlichung',
+                'services.enterprise.title': 'Unternehmenssoftware',
+                'services.enterprise.desc': 'Maßgeschneiderte Lösungen zur Automatisierung von Prozessen und Verbesserung der betrieblichen Effizienz Ihres Unternehmens.',
+                'services.enterprise.price': 'Ab 10.000€',
+                'services.enterprise.feature1': '✓ Prozessanalyse',
+                'services.enterprise.feature2': '✓ Maßgeschneiderte Entwicklung',
+                'services.enterprise.feature3': '✓ Systemintegration',
+                'services.enterprise.feature4': '✓ Team-Schulung',
+                'testimonials.title': 'Was Unsere Kunden Sagen',
+                'testimonials.subtitle': 'Die Zufriedenheit unserer Kunden ist unsere größte Belohnung. Erfahren Sie mehr über ihre Erfahrungen.',
+                'testimonials.test1.text': '"TechInnovate hat unsere digitale Präsenz komplett transformiert. Die Steigerung der Konversionen betrug 300% in nur 3 Monaten."',
+                'testimonials.test1.name': 'Maria Rodriguez',
+                'testimonials.test1.role': 'CEO, Digital Solutions',
+                'testimonials.test2.text': '"Das Entwicklungsteam ist außergewöhnlich. Sie haben unser Projekt vorzeitig geliefert und alle unsere Erwartungen übertroffen."',
+                'testimonials.test2.name': 'Juan Lopez',
+                'testimonials.test2.role': 'CTO, InnovateCorp',
+                'testimonials.test3.text': '"Die mobile Anwendung, die sie für uns entwickelt haben, war ein voller Erfolg. Unsere Benutzer sind begeistert."',
+                'testimonials.test3.name': 'Ana Garcia',
+                'testimonials.test3.role': 'Direktorin, MobileFirst',
+                'contact.title': 'Bereit, Ihr Projekt zu Starten?',
+                'contact.subtitle': 'Kontaktieren Sie uns noch heute und entdecken Sie, wie wir Ihnen helfen können, Ihre Technologieziele zu erreichen.',
+                'contact.info.title': 'Kontaktinformationen',
+                'contact.info.desc': 'Wir sind hier, um Ihnen zu helfen. Kontaktieren Sie uns über einen dieser Wege.',
+                'contact.phone.label': 'Telefon',
+                'contact.email.label': 'E-Mail',
+                'contact.address.label': 'Adresse',
+                'contact.address.value': '123 Tech Street, Silicon Valley, CA 94000',
+                'contact.form.name': 'Vollständiger Name',
+                'contact.form.email': 'E-Mail-Adresse',
+                'contact.form.company': 'Unternehmen',
+                'contact.form.message': 'Nachricht',
+                'contact.form.placeholder': 'Erzählen Sie uns von Ihrem Projekt...',
+                'contact.form.submit': 'Nachricht Senden',
+                'footer.company.desc': 'Wir verwandeln Ideen in digitale Realität mit innovativen und hochwertigen Technologielösungen.',
+                'footer.services.title': 'Dienstleistungen',
+                'footer.services.web': 'Web-Entwicklung',
+                'footer.services.mobile': 'Mobile Anwendungen',
+                'footer.services.enterprise': 'Unternehmenssoftware',
+                'footer.services.consulting': 'IT-Beratung',
+                'footer.company.title': 'Unternehmen',
+                'footer.company.about': 'Über Uns',
+                'footer.company.team': 'Team',
+                'footer.company.careers': 'Karriere',
+                'footer.company.blog': 'Blog',
+                'footer.contact.title': 'Kontakt',
+                'footer.contact.address': '123 Tech Street, Silicon Valley',
+                'footer.copyright': '© 2024 TechInnovate. Alle Rechte vorbehalten.',
+                'form.success': 'Nachricht erfolgreich gesendet! Wir werden uns bald mit Ihnen in Verbindung setzen.',
+                'form.error': 'Bitte füllen Sie alle Pflichtfelder aus.',
+                'form.sending': 'Wird gesendet...'
+            }
+        };
+
+        // Current language
+        let currentLang = localStorage.getItem('preferred-language') || 'es';
+
+        // Translation function
+        function translate(key, lang = currentLang) {
+            return translations[lang] && translations[lang][key] ? translations[lang][key] : key;
+        }
+
+        // Update page content
+        function updateContent() {
+            document.querySelectorAll('[data-translate]').forEach(element => {
+                const key = element.getAttribute('data-translate');
+                const translation = translate(key);
+                
+                if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+                    if (element.placeholder !== undefined) {
+                        element.placeholder = translation;
+                    }
+                } else {
+                    element.textContent = translation;
+                }
+            });
+
+            // Update document title
+            document.title = translate('page.title');
+            
+            // Update HTML lang attribute
+            document.documentElement.lang = currentLang;
+        }
+
+        // Language selector functionality
+        function initLanguageSelector() {
+            const langButtons = document.querySelectorAll('.lang-btn');
+            
+            // Set initial active button
+            langButtons.forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.lang === currentLang);
+            });
+
+            langButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const newLang = button.dataset.lang;
+                    
+                    if (newLang !== currentLang) {
+                        currentLang = newLang;
+                        localStorage.setItem('preferred-language', currentLang);
+                        
+                        // Update active button
+                        langButtons.forEach(btn => {
+                            btn.classList.toggle('active', btn.dataset.lang === currentLang);
+                        });
+                        
+                        // Update content
+                        updateContent();
+                    }
+                });
+            });
+        }
+
         // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
@@ -873,18 +1424,18 @@
             
             // Simple validation
             if (!name || !email || !message) {
-                alert('Por favor, completa todos los campos obligatorios.');
+                alert(translate('form.error'));
                 return;
             }
             
             // Simulate form submission
             const submitBtn = this.querySelector('button[type="submit"]');
             const originalText = submitBtn.textContent;
-            submitBtn.textContent = 'Enviando...';
+            submitBtn.textContent = translate('form.sending');
             submitBtn.disabled = true;
             
             setTimeout(() => {
-                alert('¡Mensaje enviado con éxito! Nos pondremos en contacto contigo pronto.');
+                alert(translate('form.success'));
                 this.reset();
                 submitBtn.textContent = originalText;
                 submitBtn.disabled = false;
@@ -935,18 +1486,41 @@
         `;
         document.head.appendChild(style);
 
-        // Mobile menu toggle (basic implementation)
+        // Mobile menu toggle
         document.querySelector('.mobile-menu-toggle').addEventListener('click', function() {
             const navLinks = document.querySelector('.nav-links');
-            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+            const isVisible = navLinks.style.display === 'flex';
+            navLinks.style.display = isVisible ? 'none' : 'flex';
+            
+            if (!isVisible) {
+                navLinks.style.position = 'absolute';
+                navLinks.style.top = '100%';
+                navLinks.style.left = '0';
+                navLinks.style.right = '0';
+                navLinks.style.background = 'white';
+                navLinks.style.flexDirection = 'column';
+                navLinks.style.padding = '1rem';
+                navLinks.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.1)';
+            }
         });
 
         // Parallax effect for hero section
         window.addEventListener('scroll', function() {
             const scrolled = window.pageYOffset;
             const hero = document.querySelector('.hero');
-            const rate = scrolled * -0.5;
+            const rate = scrolled * -0.3;
             hero.style.transform = `translateY(${rate}px)`;
+        });
+
+        // Initialize everything when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            initLanguageSelector();
+            updateContent();
+            
+            // Show page after loading
+            setTimeout(() => {
+                document.body.classList.add('loaded');
+            }, 300);
         });
 
         // Add loading animation
