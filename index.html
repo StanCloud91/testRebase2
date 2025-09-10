@@ -1,0 +1,1500 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-translate="page.title">TechInnovate - Soluciones Tecnológicas Avanzadas</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* Language Selector */
+        .language-selector {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1001;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 50px;
+            padding: 0.5rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .lang-btn {
+            background: transparent;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            color: #64748b;
+        }
+
+        .lang-btn.active {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .lang-btn:hover:not(.active) {
+            background: rgba(99, 102, 241, 0.1);
+            color: #6366f1;
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+        }
+
+        .nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #6366f1;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #6366f1;
+        }
+
+        .cta-button {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(99, 102, 241, 0.3);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><radialGradient id="a" cx="50%" cy="50%"><stop offset="0%" stop-color="%23ffffff" stop-opacity="0.1"/><stop offset="100%" stop-color="%23ffffff" stop-opacity="0"/></radialGradient></defs><circle cx="200" cy="200" r="100" fill="url(%23a)"/><circle cx="800" cy="300" r="150" fill="url(%23a)"/><circle cx="400" cy="700" r="120" fill="url(%23a)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-text h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero-text p {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 2rem;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: white;
+            color: #6366f1;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            padding: 1rem 2rem;
+            border: 2px solid white;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover, .btn-secondary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero-image {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .tech-animation {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.2), rgba(255,255,255,0.1));
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tech-icon {
+            font-size: 4rem;
+            color: rgba(255,255,255,0.8);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .floating-elements {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .floating-element {
+            position: absolute;
+            color: rgba(255, 255, 255, 0.3);
+            animation: floatAround 8s linear infinite;
+        }
+
+        .floating-element:nth-child(1) { top: 20%; left: 20%; animation-delay: 0s; }
+        .floating-element:nth-child(2) { top: 60%; right: 20%; animation-delay: 2s; }
+        .floating-element:nth-child(3) { bottom: 20%; left: 30%; animation-delay: 4s; }
+        .floating-element:nth-child(4) { top: 40%; right: 40%; animation-delay: 6s; }
+
+        @keyframes floatAround {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            25% { transform: translateY(-15px) rotate(90deg); }
+            50% { transform: translateY(-30px) rotate(180deg); }
+            75% { transform: translateY(-15px) rotate(270deg); }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 1rem;
+        }
+
+        .section-title p {
+            font-size: 1.1rem;
+            color: #64748b;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Services Section */
+        .services {
+            padding: 6rem 0;
+            background: white;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+            padding: 3rem;
+            border-radius: 20px;
+            transition: transform 0.3s ease;
+            border: 1px solid #e2e8f0;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 1rem;
+        }
+
+        .service-card p {
+            color: #64748b;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-price {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #6366f1;
+            margin-bottom: 1rem;
+        }
+
+        /* Testimonials Section */
+        .testimonials {
+            padding: 6rem 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .testimonials .section-title h2,
+        .testimonials .section-title p {
+            color: white;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .testimonial-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            color: white;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 6rem 0;
+            background: #f8fafc;
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        .contact-info h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 1rem;
+        }
+
+        .contact-info p {
+            color: #64748b;
+            margin-bottom: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .contact-item i {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        .contact-form {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #1e293b;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #6366f1;
+        }
+
+        .form-group textarea {
+            height: 120px;
+            resize: vertical;
+        }
+
+        /* Footer */
+        .footer {
+            background: #1e293b;
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: #94a3b8;
+            text-decoration: none;
+            line-height: 1.6;
+        }
+
+        .footer-section a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #334155;
+            padding-top: 1rem;
+            text-align: center;
+            color: #94a3b8;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #333;
+            cursor: pointer;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .language-selector {
+                top: 10px;
+                right: 10px;
+                padding: 0.3rem;
+            }
+
+            .lang-btn {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.9rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-toggle {
+                display: block;
+            }
+
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .contact-content {
+                grid-template-columns: 1fr;
+            }
+
+            .services-grid,
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        /* Scroll animations */
+        .scroll-animate {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .scroll-animate.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Loading animation */
+        .loading {
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .loaded {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="loading">
+    <!-- Language Selector -->
+    <div class="language-selector">
+        <button class="lang-btn active" data-lang="es">
+            <i class="fas fa-globe"></i> ES
+        </button>
+        <button class="lang-btn" data-lang="en">
+            <i class="fas fa-globe"></i> EN
+        </button>
+        <button class="lang-btn" data-lang="fr">
+            <i class="fas fa-globe"></i> FR
+        </button>
+        <button class="lang-btn" data-lang="de">
+            <i class="fas fa-globe"></i> DE
+        </button>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav">
+            <a href="#" class="logo">TechInnovate</a>
+            <ul class="nav-links">
+                <li><a href="#inicio" data-translate="nav.home">Inicio</a></li>
+                <li><a href="#servicios" data-translate="nav.services">Servicios</a></li>
+                <li><a href="#testimonios" data-translate="nav.testimonials">Testimonios</a></li>
+                <li><a href="#contacto" data-translate="nav.contact">Contacto</a></li>
+            </ul>
+            <button class="cta-button" data-translate="nav.cta">Comenzar</button>
+            <button class="mobile-menu-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1 data-translate="hero.title">Transformamos Ideas en Realidad Digital</h1>
+                <p data-translate="hero.subtitle">Somos líderes en soluciones tecnológicas innovadoras que impulsan el crecimiento de tu negocio. Desarrollamos software personalizado, aplicaciones móviles y sistemas web de última generación.</p>
+                <div class="hero-buttons">
+                    <a href="proyectos.html" class="btn-primary" data-translate="hero.btn1">Ver Proyectos</a>
+                    <button class="btn-secondary" data-translate="hero.btn2">Solicitar Demo</button>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="tech-animation">
+                    <div class="floating-elements">
+                        <div class="floating-element"><i class="fas fa-code"></i></div>
+                        <div class="floating-element"><i class="fas fa-mobile-alt"></i></div>
+                        <div class="floating-element"><i class="fas fa-cloud"></i></div>
+                        <div class="floating-element"><i class="fas fa-database"></i></div>
+                    </div>
+                    <i class="tech-icon fas fa-laptop-code"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Services Section -->
+    <section id="servicios" class="services">
+        <div class="container">
+            <div class="section-title">
+                <h2 data-translate="services.title">Nuestros Servicios</h2>
+                <p data-translate="services.subtitle">Ofrecemos una gama completa de servicios tecnológicos para impulsar tu negocio hacia el futuro digital.</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card scroll-animate">
+                    <h3 data-translate="services.web.title">Desarrollo Web</h3>
+                    <p data-translate="services.web.desc">Creamos sitios web modernos, rápidos y optimizados para SEO que convierten visitantes en clientes.</p>
+                    <div class="service-price" data-translate="services.web.price">Desde $2,500</div>
+                    <ul style="list-style: none; padding: 0;">
+                        <li data-translate="services.web.feature1">✓ Diseño responsivo</li>
+                        <li data-translate="services.web.feature2">✓ Optimización SEO</li>
+                        <li data-translate="services.web.feature3">✓ Integración de pagos</li>
+                        <li data-translate="services.web.feature4">✓ Panel de administración</li>
+                    </ul>
+                </div>
+                <div class="service-card scroll-animate">
+                    <h3 data-translate="services.mobile.title">Aplicaciones Móviles</h3>
+                    <p data-translate="services.mobile.desc">Desarrollamos apps nativas e híbridas para iOS y Android que ofrecen una experiencia de usuario excepcional.</p>
+                    <div class="service-price" data-translate="services.mobile.price">Desde $5,000</div>
+                    <ul style="list-style: none; padding: 0;">
+                        <li data-translate="services.mobile.feature1">✓ Diseño UX/UI</li>
+                        <li data-translate="services.mobile.feature2">✓ Desarrollo nativo</li>
+                        <li data-translate="services.mobile.feature3">✓ Integración de APIs</li>
+                        <li data-translate="services.mobile.feature4">✓ Publicación en stores</li>
+                    </ul>
+                </div>
+                <div class="service-card scroll-animate">
+                    <h3 data-translate="services.enterprise.title">Software Empresarial</h3>
+                    <p data-translate="services.enterprise.desc">Soluciones personalizadas para automatizar procesos y mejorar la eficiencia operativa de tu empresa.</p>
+                    <div class="service-price" data-translate="services.enterprise.price">Desde $10,000</div>
+                    <ul style="list-style: none; padding: 0;">
+                        <li data-translate="services.enterprise.feature1">✓ Análisis de procesos</li>
+                        <li data-translate="services.enterprise.feature2">✓ Desarrollo personalizado</li>
+                        <li data-translate="services.enterprise.feature3">✓ Integración de sistemas</li>
+                        <li data-translate="services.enterprise.feature4">✓ Capacitación del equipo</li>
+                    </ul>
+                </div>
+                <div class="service-card scroll-animate">
+                    <h3 data-translate="services.cybersecurity.title">Ciberseguridad</h3>
+                    <p data-translate="services.cybersecurity.desc">Protegemos tu infraestructura digital con soluciones avanzadas de seguridad, auditorías y monitoreo continuo.</p>
+                    <div class="service-price" data-translate="services.cybersecurity.price">Desde $3,500</div>
+                    <ul style="list-style: none; padding: 0;">
+                        <li data-translate="services.cybersecurity.feature1">✓ Auditorías de seguridad</li>
+                        <li data-translate="services.cybersecurity.feature2">✓ Monitoreo 24/7</li>
+                        <li data-translate="services.cybersecurity.feature3">✓ Protección anti-malware</li>
+                        <li data-translate="services.cybersecurity.feature4">✓ Capacitación en seguridad</li>
+                    </ul>
+                </div>
+                <div class="service-card scroll-animate">
+                    <h3 data-translate="services.outsourcing.title">Outsourcing de Servidores</h3>
+                    <p data-translate="services.outsourcing.desc">Gestionamos y mantenemos tu infraestructura de servidores para que te enfoques en tu negocio principal.</p>
+                    <div class="service-price" data-translate="services.outsourcing.price">Desde $1,800</div>
+                    <ul style="list-style: none; padding: 0;">
+                        <li data-translate="services.outsourcing.feature1">✓ Gestión completa</li>
+                        <li data-translate="services.outsourcing.feature2">✓ Mantenimiento preventivo</li>
+                        <li data-translate="services.outsourcing.feature3">✓ Monitoreo proactivo</li>
+                        <li data-translate="services.outsourcing.feature4">✓ Soporte especializado</li>
+                    </ul>
+                </div>
+                <div class="service-card scroll-animate">
+                    <h3 data-translate="services.cloud.title">Servicios de Nube</h3>
+                    <p data-translate="services.cloud.desc">Migramos y optimizamos tus sistemas en la nube para mayor escalabilidad, seguridad y eficiencia.</p>
+                    <div class="service-price" data-translate="services.cloud.price">Desde $2,200</div>
+                    <ul style="list-style: none; padding: 0;">
+                        <li data-translate="services.cloud.feature1">✓ Migración a la nube</li>
+                        <li data-translate="services.cloud.feature2">✓ Optimización de costos</li>
+                        <li data-translate="services.cloud.feature3">✓ Backup automático</li>
+                        <li data-translate="services.cloud.feature4">✓ Alta disponibilidad</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonios" class="testimonials">
+        <div class="container">
+            <div class="section-title">
+                <h2 data-translate="testimonials.title">Lo que dicen nuestros clientes</h2>
+                <p data-translate="testimonials.subtitle">La satisfacción de nuestros clientes es nuestra mayor recompensa. Conoce sus experiencias.</p>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card scroll-animate">
+                    <div class="testimonial-text" data-translate="testimonials.test1.text">
+                        "TechInnovate transformó completamente nuestra presencia digital. El aumento en conversiones fue del 300% en solo 3 meses."
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">MR</div>
+                        <div>
+                            <div style="font-weight: 600;" data-translate="testimonials.test1.name">María Rodríguez</div>
+                            <div style="font-size: 0.9rem; opacity: 0.8;" data-translate="testimonials.test1.role">CEO, Digital Solutions</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card scroll-animate">
+                    <div class="testimonial-text" data-translate="testimonials.test2.text">
+                        "El equipo de desarrollo es excepcional. Entregaron nuestro proyecto antes de tiempo y superó todas nuestras expectativas."
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">JL</div>
+                        <div>
+                            <div style="font-weight: 600;" data-translate="testimonials.test2.name">Juan López</div>
+                            <div style="font-size: 0.9rem; opacity: 0.8;" data-translate="testimonials.test2.role">CTO, InnovateCorp</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card scroll-animate">
+                    <div class="testimonial-text" data-translate="testimonials.test3.text">
+                        "La aplicación móvil que desarrollaron para nosotros ha sido un éxito total. Nuestros usuarios están encantados."
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">AG</div>
+                        <div>
+                            <div style="font-weight: 600;" data-translate="testimonials.test3.name">Ana García</div>
+                            <div style="font-size: 0.9rem; opacity: 0.8;" data-translate="testimonials.test3.role">Directora, MobileFirst</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contacto" class="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2 data-translate="contact.title">¿Listo para comenzar tu proyecto?</h2>
+                <p data-translate="contact.subtitle">Contáctanos hoy mismo y descubre cómo podemos ayudarte a alcanzar tus objetivos tecnológicos.</p>
+            </div>
+            <div class="contact-content">
+                <form class="contact-form">
+                    <div class="form-group">
+                        <label for="name" data-translate="contact.form.name">Nombre completo</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email" data-translate="contact.form.email">Correo electrónico</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="company" data-translate="contact.form.company">Empresa</label>
+                        <input type="text" id="company" name="company">
+                    </div>
+                    <div class="form-group">
+                        <label for="message" data-translate="contact.form.message">Mensaje</label>
+                        <textarea id="message" name="message" data-translate="contact.form.placeholder" placeholder="Cuéntanos sobre tu proyecto..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn-primary" style="width: 100%;" data-translate="contact.form.submit">Enviar Mensaje</button>
+                </form>
+                <div class="contact-info">
+                    <h3 data-translate="contact.info.title">Información de Contacto</h3>
+                    <p data-translate="contact.info.desc">Estamos aquí para ayudarte. Ponte en contacto con nosotros a través de cualquiera de estos medios.</p>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <div style="font-weight: 600;" data-translate="contact.phone.label">Teléfono</div>
+                            <div>+1 (555) 123-4567</div>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <div style="font-weight: 600;" data-translate="contact.email.label">Email</div>
+                            <div>info@techinnovate.com</div>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <div style="font-weight: 600;" data-translate="contact.address.label">Dirección</div>
+                            <div data-translate="contact.address.value">123 Tech Street, Silicon Valley, CA 94000</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>TechInnovate</h3>
+                    <p data-translate="footer.company.desc">Transformamos ideas en realidad digital con soluciones tecnológicas innovadoras y de alta calidad.</p>
+                </div>
+                <div class="footer-section">
+                    <h3 data-translate="footer.services.title">Servicios</h3>
+                    <p><a href="#" data-translate="footer.services.web">Desarrollo Web</a></p>
+                    <p><a href="#" data-translate="footer.services.mobile">Aplicaciones Móviles</a></p>
+                    <p><a href="#" data-translate="footer.services.enterprise">Software Empresarial</a></p>
+                    <p><a href="#" data-translate="footer.services.cybersecurity">Ciberseguridad</a></p>
+                    <p><a href="#" data-translate="footer.services.outsourcing">Outsourcing de Servidores</a></p>
+                    <p><a href="#" data-translate="footer.services.cloud">Servicios de Nube</a></p>
+                    <p><a href="#" data-translate="footer.services.consulting">Consultoría IT</a></p>
+                </div>
+                <div class="footer-section">
+                    <h3 data-translate="footer.company.title">Empresa</h3>
+                    <p><a href="#" data-translate="footer.company.about">Sobre Nosotros</a></p>
+                    <p><a href="#" data-translate="footer.company.team">Equipo</a></p>
+                    <p><a href="#" data-translate="footer.company.careers">Carreras</a></p>
+                    <p><a href="#" data-translate="footer.company.blog">Blog</a></p>
+                </div>
+                <div class="footer-section">
+                    <h3 data-translate="footer.contact.title">Contacto</h3>
+                    <p>+1 (555) 123-4567</p>
+                    <p>info@techinnovate.com</p>
+                    <p data-translate="footer.contact.address">123 Tech Street, Silicon Valley</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p data-translate="footer.copyright">&copy; 2024 TechInnovate. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Translations object
+        const translations = {
+            es: {
+                'page.title': 'TechInnovate - Soluciones Tecnológicas Avanzadas',
+                'nav.home': 'Inicio',
+                'nav.services': 'Servicios',
+                'nav.testimonials': 'Testimonios',
+                'nav.contact': 'Contacto',
+                'nav.cta': 'Comenzar',
+                'hero.title': 'Transformamos Ideas en Realidad Digital',
+                'hero.subtitle': 'Somos líderes en soluciones tecnológicas innovadoras que impulsan el crecimiento de tu negocio. Desarrollamos software personalizado, aplicaciones móviles y sistemas web de última generación.',
+                'hero.btn1': 'Ver Proyectos',
+                'hero.btn2': 'Solicitar Demo',
+                'services.title': 'Nuestros Servicios',
+                'services.subtitle': 'Ofrecemos una gama completa de servicios tecnológicos para impulsar tu negocio hacia el futuro digital.',
+                'services.web.title': 'Desarrollo Web',
+                'services.web.desc': 'Creamos sitios web modernos, rápidos y optimizados para SEO que convierten visitantes en clientes.',
+                'services.web.price': 'Desde $2,500',
+                'services.web.feature1': '✓ Diseño responsivo',
+                'services.web.feature2': '✓ Optimización SEO',
+                'services.web.feature3': '✓ Integración de pagos',
+                'services.web.feature4': '✓ Panel de administración',
+                'services.mobile.title': 'Aplicaciones Móviles',
+                'services.mobile.desc': 'Desarrollamos apps nativas e híbridas para iOS y Android que ofrecen una experiencia de usuario excepcional.',
+                'services.mobile.price': 'Desde $5,000',
+                'services.mobile.feature1': '✓ Diseño UX/UI',
+                'services.mobile.feature2': '✓ Desarrollo nativo',
+                'services.mobile.feature3': '✓ Integración de APIs',
+                'services.mobile.feature4': '✓ Publicación en stores',
+                'services.enterprise.title': 'Software Empresarial',
+                'services.enterprise.desc': 'Soluciones personalizadas para automatizar procesos y mejorar la eficiencia operativa de tu empresa.',
+                'services.enterprise.price': 'Desde $10,000',
+                'services.enterprise.feature1': '✓ Análisis de procesos',
+                'services.enterprise.feature2': '✓ Desarrollo personalizado',
+                'services.enterprise.feature3': '✓ Integración de sistemas',
+                'services.enterprise.feature4': '✓ Capacitación del equipo',
+                'services.cybersecurity.title': 'Ciberseguridad',
+                'services.cybersecurity.desc': 'Protegemos tu infraestructura digital con soluciones avanzadas de seguridad, auditorías y monitoreo continuo.',
+                'services.cybersecurity.price': 'Desde $3,500',
+                'services.cybersecurity.feature1': '✓ Auditorías de seguridad',
+                'services.cybersecurity.feature2': '✓ Monitoreo 24/7',
+                'services.cybersecurity.feature3': '✓ Protección anti-malware',
+                'services.cybersecurity.feature4': '✓ Capacitación en seguridad',
+                'services.outsourcing.title': 'Outsourcing de Servidores',
+                'services.outsourcing.desc': 'Gestionamos y mantenemos tu infraestructura de servidores para que te enfoques en tu negocio principal.',
+                'services.outsourcing.price': 'Desde $1,800',
+                'services.outsourcing.feature1': '✓ Gestión completa',
+                'services.outsourcing.feature2': '✓ Mantenimiento preventivo',
+                'services.outsourcing.feature3': '✓ Monitoreo proactivo',
+                'services.outsourcing.feature4': '✓ Soporte especializado',
+                'services.cloud.title': 'Servicios de Nube',
+                'services.cloud.desc': 'Migramos y optimizamos tus sistemas en la nube para mayor escalabilidad, seguridad y eficiencia.',
+                'services.cloud.price': 'Desde $2,200',
+                'services.cloud.feature1': '✓ Migración a la nube',
+                'services.cloud.feature2': '✓ Optimización de costos',
+                'services.cloud.feature3': '✓ Backup automático',
+                'services.cloud.feature4': '✓ Alta disponibilidad',
+                'testimonials.title': 'Lo que dicen nuestros clientes',
+                'testimonials.subtitle': 'La satisfacción de nuestros clientes es nuestra mayor recompensa. Conoce sus experiencias.',
+                'testimonials.test1.text': '"TechInnovate transformó completamente nuestra presencia digital. El aumento en conversiones fue del 300% en solo 3 meses."',
+                'testimonials.test1.name': 'María Rodríguez',
+                'testimonials.test1.role': 'CEO, Digital Solutions',
+                'testimonials.test2.text': '"El equipo de desarrollo es excepcional. Entregaron nuestro proyecto antes de tiempo y superó todas nuestras expectativas."',
+                'testimonials.test2.name': 'Juan López',
+                'testimonials.test2.role': 'CTO, InnovateCorp',
+                'testimonials.test3.text': '"La aplicación móvil que desarrollaron para nosotros ha sido un éxito total. Nuestros usuarios están encantados."',
+                'testimonials.test3.name': 'Ana García',
+                'testimonials.test3.role': 'Directora, MobileFirst',
+                'contact.title': '¿Listo para comenzar tu proyecto?',
+                'contact.subtitle': 'Contáctanos hoy mismo y descubre cómo podemos ayudarte a alcanzar tus objetivos tecnológicos.',
+                'contact.info.title': 'Información de Contacto',
+                'contact.info.desc': 'Estamos aquí para ayudarte. Ponte en contacto con nosotros a través de cualquiera de estos medios.',
+                'contact.phone.label': 'Teléfono',
+                'contact.email.label': 'Email',
+                'contact.address.label': 'Dirección',
+                'contact.address.value': '123 Tech Street, Silicon Valley, CA 94000',
+                'contact.form.name': 'Nombre completo',
+                'contact.form.email': 'Correo electrónico',
+                'contact.form.company': 'Empresa',
+                'contact.form.message': 'Mensaje',
+                'contact.form.placeholder': 'Cuéntanos sobre tu proyecto...',
+                'contact.form.submit': 'Enviar Mensaje',
+                'footer.company.desc': 'Transformamos ideas en realidad digital con soluciones tecnológicas innovadoras y de alta calidad.',
+                'footer.services.title': 'Servicios',
+                'footer.services.web': 'Desarrollo Web',
+                'footer.services.mobile': 'Aplicaciones Móviles',
+                'footer.services.enterprise': 'Software Empresarial',
+                'footer.services.consulting': 'Consultoría IT',
+                'footer.services.cybersecurity': 'Ciberseguridad',
+                'footer.services.outsourcing': 'Outsourcing de Servidores',
+                'footer.services.cloud': 'Servicios de Nube',
+                'footer.company.title': 'Empresa',
+                'footer.company.about': 'Sobre Nosotros',
+                'footer.company.team': 'Equipo',
+                'footer.company.careers': 'Carreras',
+                'footer.company.blog': 'Blog',
+                'footer.contact.title': 'Contacto',
+                'footer.contact.address': '123 Tech Street, Silicon Valley',
+                'footer.copyright': '© 2024 TechInnovate. Todos los derechos reservados.',
+                'form.success': '¡Mensaje enviado con éxito! Nos pondremos en contacto contigo pronto.',
+                'form.error': 'Por favor, completa todos los campos obligatorios.',
+                'form.sending': 'Enviando...'
+            },
+            en: {
+                'page.title': 'TechInnovate - Advanced Technology Solutions',
+                'nav.home': 'Home',
+                'nav.services': 'Services',
+                'nav.testimonials': 'Testimonials',
+                'nav.contact': 'Contact',
+                'nav.cta': 'Get Started',
+                'hero.title': 'We Transform Ideas into Digital Reality',
+                'hero.subtitle': 'We are leaders in innovative technology solutions that drive your business growth. We develop custom software, mobile applications and next-generation web systems.',
+                'hero.btn1': 'View Projects',
+                'hero.btn2': 'Request Demo',
+                'services.title': 'Our Services',
+                'services.subtitle': 'We offer a complete range of technology services to drive your business towards the digital future.',
+                'services.web.title': 'Web Development',
+                'services.web.desc': 'We create modern, fast and SEO-optimized websites that convert visitors into customers.',
+                'services.web.price': 'From $2,500',
+                'services.web.feature1': '✓ Responsive design',
+                'services.web.feature2': '✓ SEO optimization',
+                'services.web.feature3': '✓ Payment integration',
+                'services.web.feature4': '✓ Admin panel',
+                'services.mobile.title': 'Mobile Applications',
+                'services.mobile.desc': 'We develop native and hybrid apps for iOS and Android that offer an exceptional user experience.',
+                'services.mobile.price': 'From $5,000',
+                'services.mobile.feature1': '✓ UX/UI Design',
+                'services.mobile.feature2': '✓ Native development',
+                'services.mobile.feature3': '✓ API integration',
+                'services.mobile.feature4': '✓ Store publishing',
+                'services.enterprise.title': 'Enterprise Software',
+                'services.enterprise.desc': 'Custom solutions to automate processes and improve your company\'s operational efficiency.',
+                'services.enterprise.price': 'From $10,000',
+                'services.enterprise.feature1': '✓ Process analysis',
+                'services.enterprise.feature2': '✓ Custom development',
+                'services.enterprise.feature3': '✓ System integration',
+                'services.enterprise.feature4': '✓ Team training',
+                'services.cybersecurity.title': 'Cybersecurity',
+                'services.cybersecurity.desc': 'We protect your digital infrastructure with advanced security solutions, audits and continuous monitoring.',
+                'services.cybersecurity.price': 'From $3,500',
+                'services.cybersecurity.feature1': '✓ Security audits',
+                'services.cybersecurity.feature2': '✓ 24/7 monitoring',
+                'services.cybersecurity.feature3': '✓ Anti-malware protection',
+                'services.cybersecurity.feature4': '✓ Security training',
+                'services.outsourcing.title': 'Server Outsourcing',
+                'services.outsourcing.desc': 'We manage and maintain your server infrastructure so you can focus on your core business.',
+                'services.outsourcing.price': 'From $1,800',
+                'services.outsourcing.feature1': '✓ Complete management',
+                'services.outsourcing.feature2': '✓ Preventive maintenance',
+                'services.outsourcing.feature3': '✓ Proactive monitoring',
+                'services.outsourcing.feature4': '✓ Specialized support',
+                'services.cloud.title': 'Cloud Services',
+                'services.cloud.desc': 'We migrate and optimize your systems in the cloud for greater scalability, security and efficiency.',
+                'services.cloud.price': 'From $2,200',
+                'services.cloud.feature1': '✓ Cloud migration',
+                'services.cloud.feature2': '✓ Cost optimization',
+                'services.cloud.feature3': '✓ Automatic backup',
+                'services.cloud.feature4': '✓ High availability',
+                'testimonials.title': 'What Our Clients Say',
+                'testimonials.subtitle': 'Our clients\' satisfaction is our greatest reward. Learn about their experiences.',
+                'testimonials.test1.text': '"TechInnovate completely transformed our digital presence. The increase in conversions was 300% in just 3 months."',
+                'testimonials.test1.name': 'Maria Rodriguez',
+                'testimonials.test1.role': 'CEO, Digital Solutions',
+                'testimonials.test2.text': '"The development team is exceptional. They delivered our project ahead of time and exceeded all our expectations."',
+                'testimonials.test2.name': 'John Lopez',
+                'testimonials.test2.role': 'CTO, InnovateCorp',
+                'testimonials.test3.text': '"The mobile application they developed for us has been a total success. Our users are delighted."',
+                'testimonials.test3.name': 'Ana Garcia',
+                'testimonials.test3.role': 'Director, MobileFirst',
+                'contact.title': 'Ready to Start Your Project?',
+                'contact.subtitle': 'Contact us today and discover how we can help you achieve your technology goals.',
+                'contact.info.title': 'Contact Information',
+                'contact.info.desc': 'We are here to help you. Get in touch with us through any of these means.',
+                'contact.phone.label': 'Phone',
+                'contact.email.label': 'Email',
+                'contact.address.label': 'Address',
+                'contact.address.value': '123 Tech Street, Silicon Valley, CA 94000',
+                'contact.form.name': 'Full Name',
+                'contact.form.email': 'Email Address',
+                'contact.form.company': 'Company',
+                'contact.form.message': 'Message',
+                'contact.form.placeholder': 'Tell us about your project...',
+                'contact.form.submit': 'Send Message',
+                'footer.company.desc': 'We transform ideas into digital reality with innovative and high-quality technology solutions.',
+                'footer.services.title': 'Services',
+                'footer.services.web': 'Web Development',
+                'footer.services.mobile': 'Mobile Applications',
+                'footer.services.enterprise': 'Enterprise Software',
+                'footer.services.consulting': 'IT Consulting',
+                'footer.services.cybersecurity': 'Cybersecurity',
+                'footer.services.outsourcing': 'Server Outsourcing',
+                'footer.services.cloud': 'Cloud Services',
+                'footer.company.title': 'Company',
+                'footer.company.about': 'About Us',
+                'footer.company.team': 'Team',
+                'footer.company.careers': 'Careers',
+                'footer.company.blog': 'Blog',
+                'footer.contact.title': 'Contact',
+                'footer.contact.address': '123 Tech Street, Silicon Valley',
+                'footer.copyright': '© 2024 TechInnovate. All rights reserved.',
+                'form.success': 'Message sent successfully! We will contact you soon.',
+                'form.error': 'Please fill in all required fields.',
+                'form.sending': 'Sending...'
+            },
+            fr: {
+                'page.title': 'TechInnovate - Solutions Technologiques Avancées',
+                'nav.home': 'Accueil',
+                'nav.services': 'Services',
+                'nav.testimonials': 'Témoignages',
+                'nav.contact': 'Contact',
+                'nav.cta': 'Commencer',
+                'hero.title': 'Nous Transformons les Idées en Réalité Numérique',
+                'hero.subtitle': 'Nous sommes leaders en solutions technologiques innovantes qui stimulent la croissance de votre entreprise. Nous développons des logiciels personnalisés, des applications mobiles et des systèmes web de nouvelle génération.',
+                'hero.btn1': 'Voir les Projets',
+                'hero.btn2': 'Demander une Démo',
+                'services.title': 'Nos Services',
+                'services.subtitle': 'Nous offrons une gamme complète de services technologiques pour propulser votre entreprise vers l\'avenir numérique.',
+                'services.web.title': 'Développement Web',
+                'services.web.desc': 'Nous créons des sites web modernes, rapides et optimisés pour le SEO qui convertissent les visiteurs en clients.',
+                'services.web.price': 'À partir de 2 500€',
+                'services.web.feature1': '✓ Design responsive',
+                'services.web.feature2': '✓ Optimisation SEO',
+                'services.web.feature3': '✓ Intégration de paiements',
+                'services.web.feature4': '✓ Panneau d\'administration',
+                'services.mobile.title': 'Applications Mobiles',
+                'services.mobile.desc': 'Nous développons des applications natives et hybrides pour iOS et Android qui offrent une expérience utilisateur exceptionnelle.',
+                'services.mobile.price': 'À partir de 5 000€',
+                'services.mobile.feature1': '✓ Design UX/UI',
+                'services.mobile.feature2': '✓ Développement natif',
+                'services.mobile.feature3': '✓ Intégration d\'APIs',
+                'services.mobile.feature4': '✓ Publication sur les stores',
+                'services.enterprise.title': 'Logiciel d\'Entreprise',
+                'services.enterprise.desc': 'Solutions personnalisées pour automatiser les processus et améliorer l\'efficacité opérationnelle de votre entreprise.',
+                'services.enterprise.price': 'À partir de 10 000€',
+                'services.enterprise.feature1': '✓ Analyse des processus',
+                'services.enterprise.feature2': '✓ Développement personnalisé',
+                'services.enterprise.feature3': '✓ Intégration de systèmes',
+                'services.enterprise.feature4': '✓ Formation de l\'équipe',
+                'services.cybersecurity.title': 'Cybersécurité',
+                'services.cybersecurity.desc': 'Nous protégeons votre infrastructure numérique avec des solutions de sécurité avancées, des audits et une surveillance continue.',
+                'services.cybersecurity.price': 'À partir de 3 500€',
+                'services.cybersecurity.feature1': '✓ Audits de sécurité',
+                'services.cybersecurity.feature2': '✓ Surveillance 24/7',
+                'services.cybersecurity.feature3': '✓ Protection anti-malware',
+                'services.cybersecurity.feature4': '✓ Formation en sécurité',
+                'services.outsourcing.title': 'Externalisation de Serveurs',
+                'services.outsourcing.desc': 'Nous gérons et maintenons votre infrastructure de serveurs pour que vous puissiez vous concentrer sur votre cœur de métier.',
+                'services.outsourcing.price': 'À partir de 1 800€',
+                'services.outsourcing.feature1': '✓ Gestion complète',
+                'services.outsourcing.feature2': '✓ Maintenance préventive',
+                'services.outsourcing.feature3': '✓ Surveillance proactive',
+                'services.outsourcing.feature4': '✓ Support spécialisé',
+                'services.cloud.title': 'Services Cloud',
+                'services.cloud.desc': 'Nous migrons et optimisons vos systèmes dans le cloud pour une plus grande évolutivité, sécurité et efficacité.',
+                'services.cloud.price': 'À partir de 2 200€',
+                'services.cloud.feature1': '✓ Migration cloud',
+                'services.cloud.feature2': '✓ Optimisation des coûts',
+                'services.cloud.feature3': '✓ Sauvegarde automatique',
+                'services.cloud.feature4': '✓ Haute disponibilité',
+                'testimonials.title': 'Ce que Disent Nos Clients',
+                'testimonials.subtitle': 'La satisfaction de nos clients est notre plus grande récompense. Découvrez leurs expériences.',
+                'testimonials.test1.text': '"TechInnovate a complètement transformé notre présence numérique. L\'augmentation des conversions a été de 300% en seulement 3 mois."',
+                'testimonials.test1.name': 'Marie Rodriguez',
+                'testimonials.test1.role': 'PDG, Digital Solutions',
+                'testimonials.test2.text': '"L\'équipe de développement est exceptionnelle. Ils ont livré notre projet en avance et ont dépassé toutes nos attentes."',
+                'testimonials.test2.name': 'Jean Lopez',
+                'testimonials.test2.role': 'CTO, InnovateCorp',
+                'testimonials.test3.text': '"L\'application mobile qu\'ils ont développée pour nous a été un succès total. Nos utilisateurs sont ravis."',
+                'testimonials.test3.name': 'Ana Garcia',
+                'testimonials.test3.role': 'Directrice, MobileFirst',
+                'contact.title': 'Prêt à Commencer Votre Projet?',
+                'contact.subtitle': 'Contactez-nous dès aujourd\'hui et découvrez comment nous pouvons vous aider à atteindre vos objectifs technologiques.',
+                'contact.info.title': 'Informations de Contact',
+                'contact.info.desc': 'Nous sommes là pour vous aider. Contactez-nous par l\'un de ces moyens.',
+                'contact.phone.label': 'Téléphone',
+                'contact.email.label': 'Email',
+                'contact.address.label': 'Adresse',
+                'contact.address.value': '123 Tech Street, Silicon Valley, CA 94000',
+                'contact.form.name': 'Nom Complet',
+                'contact.form.email': 'Adresse Email',
+                'contact.form.company': 'Entreprise',
+                'contact.form.message': 'Message',
+                'contact.form.placeholder': 'Parlez-nous de votre projet...',
+                'contact.form.submit': 'Envoyer le Message',
+                'footer.company.desc': 'Nous transformons les idées en réalité numérique avec des solutions technologiques innovantes et de haute qualité.',
+                'footer.services.title': 'Services',
+                'footer.services.web': 'Développement Web',
+                'footer.services.mobile': 'Applications Mobiles',
+                'footer.services.enterprise': 'Logiciel d\'Entreprise',
+                'footer.services.consulting': 'Conseil IT',
+                'footer.services.cybersecurity': 'Cybersécurité',
+                'footer.services.outsourcing': 'Externalisation de Serveurs',
+                'footer.services.cloud': 'Services Cloud',
+                'footer.company.title': 'Entreprise',
+                'footer.company.about': 'À Propos',
+                'footer.company.team': 'Équipe',
+                'footer.company.careers': 'Carrières',
+                'footer.company.blog': 'Blog',
+                'footer.contact.title': 'Contact',
+                'footer.contact.address': '123 Tech Street, Silicon Valley',
+                'footer.copyright': '© 2024 TechInnovate. Tous droits réservés.',
+                'form.success': 'Message envoyé avec succès! Nous vous contacterons bientôt.',
+                'form.error': 'Veuillez remplir tous les champs obligatoires.',
+                'form.sending': 'Envoi en cours...'
+            },
+            de: {
+                'page.title': 'TechInnovate - Fortgeschrittene Technologielösungen',
+                'nav.home': 'Startseite',
+                'nav.services': 'Dienstleistungen',
+                'nav.testimonials': 'Referenzen',
+                'nav.contact': 'Kontakt',
+                'nav.cta': 'Loslegen',
+                'hero.title': 'Wir Verwandeln Ideen in Digitale Realität',
+                'hero.subtitle': 'Wir sind führend bei innovativen Technologielösungen, die das Wachstum Ihres Unternehmens vorantreiben. Wir entwickeln maßgeschneiderte Software, mobile Anwendungen und Web-Systeme der nächsten Generation.',
+                'hero.btn1': 'Projekte Ansehen',
+                'hero.btn2': 'Demo Anfordern',
+                'services.title': 'Unsere Dienstleistungen',
+                'services.subtitle': 'Wir bieten eine vollständige Palette von Technologiedienstleistungen, um Ihr Unternehmen in die digitale Zukunft zu führen.',
+                'services.web.title': 'Web-Entwicklung',
+                'services.web.desc': 'Wir erstellen moderne, schnelle und SEO-optimierte Websites, die Besucher in Kunden verwandeln.',
+                'services.web.price': 'Ab 2.500€',
+                'services.web.feature1': '✓ Responsives Design',
+                'services.web.feature2': '✓ SEO-Optimierung',
+                'services.web.feature3': '✓ Zahlungsintegration',
+                'services.web.feature4': '✓ Admin-Panel',
+                'services.mobile.title': 'Mobile Anwendungen',
+                'services.mobile.desc': 'Wir entwickeln native und hybride Apps für iOS und Android, die eine außergewöhnliche Benutzererfahrung bieten.',
+                'services.mobile.price': 'Ab 5.000€',
+                'services.mobile.feature1': '✓ UX/UI Design',
+                'services.mobile.feature2': '✓ Native Entwicklung',
+                'services.mobile.feature3': '✓ API-Integration',
+                'services.mobile.feature4': '✓ Store-Veröffentlichung',
+                'services.enterprise.title': 'Unternehmenssoftware',
+                'services.enterprise.desc': 'Maßgeschneiderte Lösungen zur Automatisierung von Prozessen und Verbesserung der betrieblichen Effizienz Ihres Unternehmens.',
+                'services.enterprise.price': 'Ab 10.000€',
+                'services.enterprise.feature1': '✓ Prozessanalyse',
+                'services.enterprise.feature2': '✓ Maßgeschneiderte Entwicklung',
+                'services.enterprise.feature3': '✓ Systemintegration',
+                'services.enterprise.feature4': '✓ Team-Schulung',
+                'services.cybersecurity.title': 'Cybersicherheit',
+                'services.cybersecurity.desc': 'Wir schützen Ihre digitale Infrastruktur mit fortschrittlichen Sicherheitslösungen, Audits und kontinuierlicher Überwachung.',
+                'services.cybersecurity.price': 'Ab 3.500€',
+                'services.cybersecurity.feature1': '✓ Sicherheitsaudits',
+                'services.cybersecurity.feature2': '✓ 24/7 Überwachung',
+                'services.cybersecurity.feature3': '✓ Anti-Malware-Schutz',
+                'services.cybersecurity.feature4': '✓ Sicherheitsschulung',
+                'services.outsourcing.title': 'Server-Outsourcing',
+                'services.outsourcing.desc': 'Wir verwalten und warten Ihre Server-Infrastruktur, damit Sie sich auf Ihr Kerngeschäft konzentrieren können.',
+                'services.outsourcing.price': 'Ab 1.800€',
+                'services.outsourcing.feature1': '✓ Vollständige Verwaltung',
+                'services.outsourcing.feature2': '✓ Vorbeugende Wartung',
+                'services.outsourcing.feature3': '✓ Proaktive Überwachung',
+                'services.outsourcing.feature4': '✓ Spezialisierter Support',
+                'services.cloud.title': 'Cloud-Services',
+                'services.cloud.desc': 'Wir migrieren und optimieren Ihre Systeme in der Cloud für größere Skalierbarkeit, Sicherheit und Effizienz.',
+                'services.cloud.price': 'Ab 2.200€',
+                'services.cloud.feature1': '✓ Cloud-Migration',
+                'services.cloud.feature2': '✓ Kostenoptimierung',
+                'services.cloud.feature3': '✓ Automatisches Backup',
+                'services.cloud.feature4': '✓ Hohe Verfügbarkeit',
+                'testimonials.title': 'Was Unsere Kunden Sagen',
+                'testimonials.subtitle': 'Die Zufriedenheit unserer Kunden ist unsere größte Belohnung. Erfahren Sie mehr über ihre Erfahrungen.',
+                'testimonials.test1.text': '"TechInnovate hat unsere digitale Präsenz komplett transformiert. Die Steigerung der Konversionen betrug 300% in nur 3 Monaten."',
+                'testimonials.test1.name': 'Maria Rodriguez',
+                'testimonials.test1.role': 'CEO, Digital Solutions',
+                'testimonials.test2.text': '"Das Entwicklungsteam ist außergewöhnlich. Sie haben unser Projekt vorzeitig geliefert und alle unsere Erwartungen übertroffen."',
+                'testimonials.test2.name': 'Juan Lopez',
+                'testimonials.test2.role': 'CTO, InnovateCorp',
+                'testimonials.test3.text': '"Die mobile Anwendung, die sie für uns entwickelt haben, war ein voller Erfolg. Unsere Benutzer sind begeistert."',
+                'testimonials.test3.name': 'Ana Garcia',
+                'testimonials.test3.role': 'Direktorin, MobileFirst',
+                'contact.title': 'Bereit, Ihr Projekt zu Starten?',
+                'contact.subtitle': 'Kontaktieren Sie uns noch heute und entdecken Sie, wie wir Ihnen helfen können, Ihre Technologieziele zu erreichen.',
+                'contact.info.title': 'Kontaktinformationen',
+                'contact.info.desc': 'Wir sind hier, um Ihnen zu helfen. Kontaktieren Sie uns über einen dieser Wege.',
+                'contact.phone.label': 'Telefon',
+                'contact.email.label': 'E-Mail',
+                'contact.address.label': 'Adresse',
+                'contact.address.value': '123 Tech Street, Silicon Valley, CA 94000',
+                'contact.form.name': 'Vollständiger Name',
+                'contact.form.email': 'E-Mail-Adresse',
+                'contact.form.company': 'Unternehmen',
+                'contact.form.message': 'Nachricht',
+                'contact.form.placeholder': 'Erzählen Sie uns von Ihrem Projekt...',
+                'contact.form.submit': 'Nachricht Senden',
+                'footer.company.desc': 'Wir verwandeln Ideen in digitale Realität mit innovativen und hochwertigen Technologielösungen.',
+                'footer.services.title': 'Dienstleistungen',
+                'footer.services.web': 'Web-Entwicklung',
+                'footer.services.mobile': 'Mobile Anwendungen',
+                'footer.services.enterprise': 'Unternehmenssoftware',
+                'footer.services.consulting': 'IT-Beratung',
+                'footer.services.cybersecurity': 'Cybersicherheit',
+                'footer.services.outsourcing': 'Server-Outsourcing',
+                'footer.services.cloud': 'Cloud-Services',
+                'footer.company.title': 'Unternehmen',
+                'footer.company.about': 'Über Uns',
+                'footer.company.team': 'Team',
+                'footer.company.careers': 'Karriere',
+                'footer.company.blog': 'Blog',
+                'footer.contact.title': 'Kontakt',
+                'footer.contact.address': '123 Tech Street, Silicon Valley',
+                'footer.copyright': '© 2024 TechInnovate. Alle Rechte vorbehalten.',
+                'form.success': 'Nachricht erfolgreich gesendet! Wir werden uns bald mit Ihnen in Verbindung setzen.',
+                'form.error': 'Bitte füllen Sie alle Pflichtfelder aus.',
+                'form.sending': 'Wird gesendet...'
+            }
+        };
+
+        // Current language
+        let currentLang = localStorage.getItem('preferred-language') || 'es';
+
+        // Translation function
+        function translate(key, lang = currentLang) {
+            return translations[lang] && translations[lang][key] ? translations[lang][key] : key;
+        }
+
+        // Update page content
+        function updateContent() {
+            document.querySelectorAll('[data-translate]').forEach(element => {
+                const key = element.getAttribute('data-translate');
+                const translation = translate(key);
+                
+                if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+                    if (element.placeholder !== undefined) {
+                        element.placeholder = translation;
+                    }
+                } else {
+                    element.textContent = translation;
+                }
+            });
+
+            // Update document title
+            document.title = translate('page.title');
+            
+            // Update HTML lang attribute
+            document.documentElement.lang = currentLang;
+        }
+
+        // Language selector functionality
+        function initLanguageSelector() {
+            const langButtons = document.querySelectorAll('.lang-btn');
+            
+            // Set initial active button
+            langButtons.forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.lang === currentLang);
+            });
+
+            langButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const newLang = button.dataset.lang;
+                    
+                    if (newLang !== currentLang) {
+                        currentLang = newLang;
+                        localStorage.setItem('preferred-language', currentLang);
+                        
+                        // Update active button
+                        langButtons.forEach(btn => {
+                            btn.classList.toggle('active', btn.dataset.lang === currentLang);
+                        });
+                        
+                        // Update content
+                        updateContent();
+                    }
+                });
+            });
+        }
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Header background change on scroll
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(255, 255, 255, 0.98)';
+                header.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
+            } else {
+                header.style.background = 'rgba(255, 255, 255, 0.95)';
+                header.style.boxShadow = 'none';
+            }
+        });
+
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all scroll-animate elements
+        document.querySelectorAll('.scroll-animate').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Form submission
+        document.querySelector('.contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = new FormData(this);
+            const name = formData.get('name');
+            const email = formData.get('email');
+            const company = formData.get('company');
+            const message = formData.get('message');
+            
+            // Simple validation
+            if (!name || !email || !message) {
+                alert(translate('form.error'));
+                return;
+            }
+            
+            // Simulate form submission
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = translate('form.sending');
+            submitBtn.disabled = true;
+            
+            setTimeout(() => {
+                alert(translate('form.success'));
+                this.reset();
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            }, 2000);
+        });
+
+        // CTA button interactions
+        document.querySelectorAll('.cta-button, .btn-primary, .btn-secondary').forEach(button => {
+            button.addEventListener('click', function(e) {
+                // Add ripple effect
+                const ripple = document.createElement('span');
+                const rect = this.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                const x = e.clientX - rect.left - size / 2;
+                const y = e.clientY - rect.top - size / 2;
+                
+                ripple.style.width = ripple.style.height = size + 'px';
+                ripple.style.left = x + 'px';
+                ripple.style.top = y + 'px';
+                ripple.classList.add('ripple');
+                
+                this.appendChild(ripple);
+                
+                setTimeout(() => {
+                    ripple.remove();
+                }, 600);
+            });
+        });
+
+        // Add ripple effect styles
+        const style = document.createElement('style');
+        style.textContent = `
+            .ripple {
+                position: absolute;
+                border-radius: 50%;
+                background: rgba(255, 255, 255, 0.6);
+                transform: scale(0);
+                animation: ripple 0.6s linear;
+                pointer-events: none;
+            }
+            
+            @keyframes ripple {
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Mobile menu toggle
+        document.querySelector('.mobile-menu-toggle').addEventListener('click', function() {
+            const navLinks = document.querySelector('.nav-links');
+            const isVisible = navLinks.style.display === 'flex';
+            navLinks.style.display = isVisible ? 'none' : 'flex';
+            
+            if (!isVisible) {
+                navLinks.style.position = 'absolute';
+                navLinks.style.top = '100%';
+                navLinks.style.left = '0';
+                navLinks.style.right = '0';
+                navLinks.style.background = 'white';
+                navLinks.style.flexDirection = 'column';
+                navLinks.style.padding = '1rem';
+                navLinks.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.1)';
+            }
+        });
+
+        // Parallax effect for hero section
+        window.addEventListener('scroll', function() {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('.hero');
+            const rate = scrolled * -0.3;
+            hero.style.transform = `translateY(${rate}px)`;
+        });
+
+        // Initialize everything when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            initLanguageSelector();
+            updateContent();
+            
+            // Show page after loading
+            setTimeout(() => {
+                document.body.classList.add('loaded');
+            }, 300);
+        });
+
+        // Add loading animation
+        window.addEventListener('load', function() {
+            document.body.classList.add('loaded');
+        });
+    </script>
+</body>
+</html>
